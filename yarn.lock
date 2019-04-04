@@ -1250,6 +1250,13 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
+axios@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
+  dependencies:
+    follow-redirects "^1.3.0"
+    is-buffer "^1.1.5"
+
 axobject-query@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.0.2.tgz#ea187abe5b9002b377f925d8bf7d1c561adf38f9"
@@ -2167,6 +2174,10 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.5, cosmiconfig@^5.0.7:
     js-yaml "^3.13.0"
     parse-json "^4.0.0"
 
+crc@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/crc/-/crc-3.4.4.tgz#9da1e980e3bd44fc5c93bf5ab3da3378d85e466b"
+
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
@@ -2568,7 +2579,7 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
 
-depd@~1.1.2:
+depd@~1.1.1, depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
 
@@ -3143,6 +3154,20 @@ expect@^23.6.0:
     jest-message-util "^23.4.0"
     jest-regex-util "^23.3.0"
 
+express-session@^1.15.6:
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.15.6.tgz#47b4160c88f42ab70fe8a508e31cbff76757ab0a"
+  dependencies:
+    cookie "0.3.1"
+    cookie-signature "1.0.6"
+    crc "3.4.4"
+    debug "2.6.9"
+    depd "~1.1.1"
+    on-headers "~1.0.1"
+    parseurl "~1.3.2"
+    uid-safe "~2.1.5"
+    utils-merge "1.0.1"
+
 express@^4.16.2, express@^4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
@@ -3408,7 +3433,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.3.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
   dependencies:
@@ -5792,7 +5817,7 @@ on-finished@~2.3.0:
   dependencies:
     ee-first "1.1.1"
 
-on-headers@~1.0.2:
+on-headers@~1.0.1, on-headers@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.2.tgz#772b0ae6aaa525c399e489adfad90c403eb3c28f"
 
@@ -6961,6 +6986,10 @@ raf@3.4.1:
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
   dependencies:
     performance-now "^2.1.0"
+
+random-bytes@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/random-bytes/-/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
 
 randomatic@^3.0.0:
   version "3.1.1"
@@ -8401,6 +8430,12 @@ uglify-js@3.4.x, uglify-js@^3.1.4:
   dependencies:
     commander "~2.19.0"
     source-map "~0.6.1"
+
+uid-safe@~2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/uid-safe/-/uid-safe-2.1.5.tgz#2b3d5c7240e8fc2e58f8aa269e5ee49c0857bd3a"
+  dependencies:
+    random-bytes "~1.0.0"
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
