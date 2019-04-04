@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Button from './components/hookDemo'
+
 import axios from 'axios'
 import logo from './logo.svg';
 import './App.css';
@@ -43,6 +45,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <Button />
           {this.state.loggedIn 
             ? <h1>Thanks for loggin in: {this.state.username}</h1>
             : <div>
