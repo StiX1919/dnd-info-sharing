@@ -1,0 +1,36 @@
+.App {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+  
+  .playArea {
+    display: flex;
+    height: calc(100vh - 55px)
+  }
+  
+  
+  .player {
+    width: 200px;
+    height: 50px;
+  
+    border: solid black 2px;
+    color: white
+  }
+  
+  .table {
+    height: 250px;
+    width: 150px;
+    border: solid black 2px;
+    margin: 20px
+  
+  }
+  
+  .seats {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  
+    justify-content: space-around
+  }

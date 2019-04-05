@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import axios from 'axios'
-import logo from './logo.svg';
+import logo from './logo.svg'
+import Table from './components/table/Table'
 import './App.css';
 
 class App extends Component {
@@ -16,8 +17,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          
+        
+          <Table />
         </header>
       </div>
     );
