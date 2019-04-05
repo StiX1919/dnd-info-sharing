@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
+const axios = require('axios')
 
 const app = express()
 const {PORT_NUM, SESSION_SECRET} = process.env
@@ -15,19 +16,7 @@ app.use(session({
     }
 }))
 
-app.post('/auth/login', (req, res) => {
-    const {username, password} = req.body
-    req.session.user = {username, password}
-    res.status(200).send(req.session)
-})
-app.get('/auth/getUser', (req, res) => {
-    if(req.session.user){
-        res.status(200).send(req.session.user)
-    } else {
-        res.status(401).send('log in plz')
-    }
 
-})
 
 
 app.listen(PORT_NUM, () => {
