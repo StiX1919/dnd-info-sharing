@@ -14,7 +14,7 @@ class Table extends Component {
   constructor(){
     super()
     this.state = {
-      players: ['spencer', 'bob', 'POe', 'StiX', 'payton'],
+      players: ['spencer', 'bob', 'POe', 'StiX', 'gAfy'],
       shareInfo: ['Invisible steak bites', "he's drunk", "worth no money", "Has 11 toes"]
     }
   }

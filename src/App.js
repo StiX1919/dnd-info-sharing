@@ -11,13 +11,15 @@ class App extends Component {
     this.state = {
     }
   }
+  async userLogin() {
+    window.location.href='http://localhost:3001/api/login'
+  }
   
-
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
+          <button onClick={this.userLogin}>Login</button>
         
           <Table />
         </header>
