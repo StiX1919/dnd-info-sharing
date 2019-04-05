@@ -1,0 +1,21 @@
+.header {
+    width: 100vw;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgb(36, 126, 148);
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.app-logo {
+    width: 100px
+}
+.app-title {
+
+}
+.login-button {
+    width: 100px
+}
