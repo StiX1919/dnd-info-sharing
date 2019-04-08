@@ -37,12 +37,11 @@ passport.use(
     callbackURL: "/api/login"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-    console.log(profile)
     app.get('db').getUserByAuthId([profile.id]).then(response => {
         let fullName = profile.displayName
 
         if(!response[0]) {
-            app.get('db').createUserByAuthId([profile.id, fullName])
+            app.get('db').createUserByAuthId([profile.id, fullName, profile.picture])
             .then(created => {
                 return done(null, created[0])
             })
@@ -55,7 +54,8 @@ passport.use(
   }
 ));
 passport.serializeUser(function(user, done) {
-    done(null, user)
+    let {username, user_image, uu_id} = user
+    done(null, {username, user_image, uu_id})
 })
 passport.deserializeUser(function(obj, done) {
     done(null, obj)

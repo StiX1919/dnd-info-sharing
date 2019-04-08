@@ -3,6 +3,9 @@ import Header from './components/header/Header'
 import Profile from './components/profile/Profile'
 
 import axios from 'axios'
+import {connect} from 'react-redux'
+
+import {setUser} from './ducks/reducers/userReducer'
 
 import './App.css';
 
@@ -14,18 +17,19 @@ class App extends Component {
       profile: false,
       username: ''
     }
-    
+
   }
 
   componentDidMount(){
-    axios.get('/api/checkSession').then(res => {
-      this.setState({username: res.data.username})
-    })
+    if(!this.props.user){
+      axios.get('/api/checkSession').then(res => {
+        this.props.setUser(res.data)
+      })
+    }
   }
   
   render() {
-    console.log(this.state)
-    let {loggedIn, profile} = this.state
+    console.log(this.props)
     return (
       <div className="App">
         <Header />
@@ -34,4 +38,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({...state.userReducer})
+
+export default connect(mapStateToProps, {setUser})(App);
