@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const axios = require('axios')
+const massive = require('massive')
 
 const passport = require('passport');
 const Auth0Strategy = require("passport-auth0");
@@ -10,14 +11,22 @@ const app = express()
 const {PORT_NUM, SESSION_SECRET} = process.env
 
 app.use(express.json())
+massive(process.env.CONNECTION_STRING)
+.then(db => {
+  app.set("db", db);
+})
+.catch(err => console.log('massive-err', err));
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 10
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }))
+
+app.use( passport.initialize() )
+app.use( passport.session() )
 
 passport.use( 
     new Auth0Strategy(
@@ -28,6 +37,7 @@ passport.use(
     callbackURL: "/api/login"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
+    console.log(profile.id, 'ID')
     
     app.get('db').getUserByAuthId([profile.id]).then(response => {
 
@@ -57,6 +67,9 @@ app.get('/api/login', passport.authenticate('auth0', {
         res.redirect(`http://localhost:3000`)
     }
 )
+app.get('/api/checkSession', (req, res) => {
+    res.status(200).send(req.session)
+})
 
 
 

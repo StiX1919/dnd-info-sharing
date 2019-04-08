@@ -1,0 +1,1 @@
+select * from users where uu_id = $1
