@@ -17,9 +17,9 @@ class App extends Component {
   componentDidMount(){
     axios.get('/api/checkSession').then(res => {
       console.log(res.data)
-      if(res.data.passport){
+      if(res.data.uu_id){
         this.setState({loggedIn: true})
-        if(res.data.passport.user.username){
+        if(res.data.username){
           this.setState({profile: true})
         }
       }

@@ -67,7 +67,7 @@ app.get('/api/login', passport.authenticate('auth0', {
     }
 )
 app.get('/api/checkSession', (req, res) => {
-    res.status(200).send(req.session)
+    res.status(200).send(req.session.passport.user)
 })
 
 
