@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header'
+import Profile from './components/profile/Profile'
 
 import axios from 'axios'
 
@@ -10,34 +11,24 @@ class App extends Component {
     super()
     this.state = {
       loggedIn: false,
-      profile: false
+      profile: false,
+      username: ''
     }
+    
   }
 
   componentDidMount(){
     axios.get('/api/checkSession').then(res => {
-      console.log(res.data)
-      if(res.data.uu_id){
-        this.setState({loggedIn: true})
-        if(res.data.username){
-          this.setState({profile: true})
-        }
-      }
+      this.setState({username: res.data.username})
     })
   }
   
-  
   render() {
+    console.log(this.state)
     let {loggedIn, profile} = this.state
     return (
       <div className="App">
         <Header />
-        {loggedIn 
-          ? profile 
-            ? <h1>Thanks for loggin in</h1>
-            : <h1>Input user info</h1>
-          : <h1>Please login</h1>
-        }
       </div>
     );
   }

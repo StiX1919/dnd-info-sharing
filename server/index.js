@@ -37,11 +37,12 @@ passport.use(
     callbackURL: "/api/login"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
-    
+    console.log(profile)
     app.get('db').getUserByAuthId([profile.id]).then(response => {
+        let fullName = profile.displayName
 
         if(!response[0]) {
-            app.get('db').createUserByAuthId([profile.id, 'email'])
+            app.get('db').createUserByAuthId([profile.id, fullName])
             .then(created => {
                 return done(null, created[0])
             })
@@ -67,7 +68,10 @@ app.get('/api/login', passport.authenticate('auth0', {
     }
 )
 app.get('/api/checkSession', (req, res) => {
-    res.status(200).send(req.session.passport.user)
+    if(req.session.passport){
+        res.status(200).send(req.session.passport.user)
+    }
+    else res.sendStatus(500)
 })
 
 
