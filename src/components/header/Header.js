@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import './Header.css'
 
+import logo from '../../logo'
 import {connect} from 'react-redux'
-import userReducer from '../../ducks/reducers/userReducer';
+import {} from '../../ducks/reducers/userReducer';
 
 class Header extends Component {
 
@@ -14,12 +15,14 @@ class Header extends Component {
     render(){
         return (
             <div className='header'>
-                <h1 className='app-logo'>Logo</h1>
+                <div className='button-holder'><img className='app-logo' src={logo} alt='logo'/></div>
                 <h1 className='app-title'>Header</h1>
-                {this.props.user 
-                    ? <div className='button-holder'><img className='user-button' src={this.props.user.user_image} alt='user'/></div>
-                    : <div className='button-holder'><button className='login-button' onClick={this.userLogin}>Login</button></div>
-                }
+                <div className='button-holder'>
+                    {this.props.user 
+                        ? <img className='user-button' src={this.props.user.user_image} alt='user'/>
+                        : <button className='login-button' onClick={this.userLogin}>Login</button>
+                    }
+                </div>
             </div>
         )
     }
