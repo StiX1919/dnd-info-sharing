@@ -19,15 +19,23 @@
 .button-holder {
     width: 100px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center
 }
 .login-button {
     width: 50px;
-    margin-right: 10px
+    margin-left: 20px
 }
 .user-button {
     height: 40px;
     border-radius: 50%;
-    margin-right: 10px
+    margin-left: 20px;
+    border: solid rgba(41, 41, 41, 0.897) 1px
+}
+.user-button:hover {
+    border: solid rgb(61, 61, 61) 1px;
+    height: 41px
+}.user-button:active {
+    border: solid black 1px;
+    height: 39px
 }

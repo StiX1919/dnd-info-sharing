@@ -5,9 +5,9 @@ const axios = require('axios')
 const massive = require('massive')
 
 const passport = require('passport');
-const Auth0Strategy = require("passport-auth0");
 
 const app = express()
+const auth = require('./authSetup')
 const {PORT_NUM, SESSION_SECRET} = process.env
 
 app.use(express.json())
@@ -27,32 +27,7 @@ app.use(session({
 
 app.use( passport.initialize() )
 app.use( passport.session() )
-
-passport.use( 
-    new Auth0Strategy(
-  {
-    domain: process.env.DOMAIN,
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "/api/login"
-  },
-  function(accessToken, refreshToken, extraParams, profile, done) {
-    app.get('db').getUserByAuthId([profile.id]).then(response => {
-        let fullName = profile.displayName
-
-        if(!response[0]) {
-            app.get('db').createUserByAuthId([profile.id, fullName, profile.picture])
-            .then(created => {
-                return done(null, created[0])
-            })
-        } else {
-            return done(null, response[0])
-            
-        }
-    })
-
-  }
-));
+passport.use( auth(app) );
 passport.serializeUser(function(user, done) {
     let {username, user_image, uu_id} = user
     done(null, {username, user_image, uu_id})
@@ -60,6 +35,12 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
     done(null, obj)
 })
+
+
+
+
+
+
 
 app.get('/api/login', passport.authenticate('auth0', {
         failureRedirect: `http://localhost:3001/api/login`
