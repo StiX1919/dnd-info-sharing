@@ -32,8 +32,8 @@
     border-radius: 50%;
     margin-left: 20px;
     border: solid rgba(41, 41, 41, 0.897) 1px;
-    background-size: contain;
-    transition: .25s
+    background-size: 40px 40px;
+    /* transition: .25s */
 }
 .user-button:hover {
     border: solid rgb(61, 61, 61) 1px;
@@ -42,6 +42,7 @@
 }.user-button:active {
     border: solid black 1px;
     box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,1);
+    background-size: 39px 39px;
     
 }
 .user-image {

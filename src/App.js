@@ -33,6 +33,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        {this.props.profile &&
+          <Profile />
+        }
       </div>
     );
   }

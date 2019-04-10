@@ -3,7 +3,7 @@ import './Header.css'
 
 import logo from '../../logo'
 import {connect} from 'react-redux'
-import {} from '../../ducks/reducers/userReducer';
+import {openProfile} from '../../ducks/reducers/userReducer';
 
 class Header extends Component {
 
@@ -19,8 +19,8 @@ class Header extends Component {
                 <h1 className='app-title'>Header</h1>
                 <div className='button-holder'>
                     {this.props.user 
-                        ? <div className='user-button' style={{backgroundImage: `url(${this.props.user.user_image})`}}></div>
-                        : <button className='login-button' onClick={this.userLogin}>Login</button>
+                        ? <button  className='login-button' onClick={this.userLogin}>Login</button>
+                        : <div className='user-button' onClick={this.props.openProfile} style={this.props.user ?{backgroundImage: `url(${this.props.user.user_image})`}: null}></div>
                     }
                 </div>
             </div>
@@ -30,4 +30,4 @@ class Header extends Component {
 
 const mapStateToProps = state => ({...state.userReducer})
 
-export default connect(mapStateToProps, {})(Header)
+export default connect(mapStateToProps, {openProfile})(Header)
