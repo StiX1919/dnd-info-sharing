@@ -19,7 +19,7 @@ class Header extends Component {
                 <h1 className='app-title'>Header</h1>
                 <div className='button-holder'>
                     {this.props.user 
-                        ? <img className='user-button' src={this.props.user.user_image} alt='user'/>
+                        ? <div className='user-button' style={{backgroundImage: `url(${this.props.user.user_image})`}}></div>
                         : <button className='login-button' onClick={this.userLogin}>Login</button>
                     }
                 </div>

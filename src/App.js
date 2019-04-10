@@ -19,7 +19,7 @@ class App extends Component {
     }
 
   }
-
+  
   componentDidMount(){
     if(!this.props.user){
       axios.get('/api/checkSession').then(res => {
