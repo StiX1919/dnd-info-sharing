@@ -7,9 +7,13 @@
     background-size: contain;
     padding: 0;
 
-    background-color: rgb(221, 221, 221)
+    background-color: rgb(221, 221, 221);
     
-    /* transition: .25s */
+    /* transition: box-shadow .25s,
+                height .25s,
+                width .25s,
+                background-size .25s,
+                padding .25s */
 }
 .reuse-button:hover {
     border: solid rgb(61, 61, 61) 1px;

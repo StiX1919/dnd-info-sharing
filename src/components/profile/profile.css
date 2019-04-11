@@ -51,7 +51,7 @@
     color: #B0BEC5
 }.prof-input:focus {
     outline: none;
-    box-shadow: 0.2rem 0.8rem 1.6rem rgb(24, 24, 24);
+    box-shadow: 1px 7px 10px -5px rgb(24, 24, 24);
 }
 
 /* labels */
@@ -152,3 +152,4 @@
     background-color: rgb(221, 221, 221)
     
 }
+

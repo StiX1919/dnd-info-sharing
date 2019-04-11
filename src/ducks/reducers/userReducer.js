@@ -13,7 +13,7 @@ const initialState = {
     testNum: 0,
     isLoading: false,
     user: null,
-    profile: false
+    profile: false,
 
 }
 //Action Creators
