@@ -1,13 +1,26 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
-export default class Profile extends Component {
+import './profile.css'
+
+class Profile extends Component {
 
     render() {
-        const {updateUsername, username} = this.props
+        console.log('profile', this.props)
+        const { profile, user } = this.props
         return (
-            <div>
-                <input onChange={(e) => updateUsername(e.target.value)} placeholder='Username' value={username}/>
+            <div className={profile ? 'profile-bar hidden' : 'profile-bar'}>
+                <h2>Profile:</h2>
+                <h3>Username:</h3>
+                <input placeholder='Username' value={user.username}/>
+                <h3>Profile Picture:</h3>
+                <input placeholder='Username' value={user.user_image}/>
+                <button>Logout</button>
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {return {...state.userReducer}}
+
+export default connect(mapStateToProps, {})(Profile)

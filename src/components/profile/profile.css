@@ -1,0 +1,29 @@
+.profile-bar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15vw;
+    height: calc(100vh - 80px);
+
+    background-color: rgb(216, 216, 216);
+    border-left: solid black 1px;
+    box-shadow: -5px 0 10px 0px rgb(29, 29, 29);
+
+    z-index: -1;
+    transition: .5;
+    display: flex;
+    flex-direction: column
+}
+
+.hidden {
+    animation: hide .5s forwards
+}
+
+@keyframes hide {
+    from {
+        right: -15vw
+    }
+    to {
+        right: 0
+    }
+}

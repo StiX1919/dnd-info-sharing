@@ -9,6 +9,7 @@
     background-color: rgb(36, 126, 148);
     box-sizing: border-box;
     padding: 0 20px;
+    border-bottom: solid black 1px
 }
 .app-logo {
     width: 70px
@@ -21,10 +22,6 @@
     display: flex;
     justify-content: center;
     align-items: center
-}
-.login-button {
-    width: 50px;
-    margin-left: 20px
 }
 .user-button {
     height: 40px;
