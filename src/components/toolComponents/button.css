@@ -24,4 +24,6 @@
     height: 49px;
     width: 49px;
     padding: 0
+}.reuse-button:focus {
+    outline: none
 }
