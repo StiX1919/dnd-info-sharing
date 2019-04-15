@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import {saveUserInfo} from '../../ducks/reducers/userReducer'
+
 import './profile.css'
+import { ucs2 } from 'punycode';
 
 class Profile extends Component {
     constructor(){
@@ -23,6 +26,19 @@ class Profile extends Component {
         if(this.props.user.user_image){
             e.target.src = this.props.user.user_image
         } else e.target.src = 'https://wdcolledge.com/wp-content/uploads/2018/04/placeholder.png'
+    }
+    saveUser = () => {
+        let username = this.state.editName
+        let userImage = this.state.editPic
+        if(username === ''){
+            username = this.props.user.username
+        }
+        if(userImage === ''){
+            userImage = this.props.user.user_image
+        }
+        
+        this.props.saveUserInfo({username, userImage})
+        this.setState({changeUserInfo: !this.state.changeUserInfo})
     }
 
     
@@ -55,7 +71,10 @@ class Profile extends Component {
                         onChange={this.handleChange}/>
                     <label htmlFor="prof-pic-input" className="prof-pic-label">Profile Picture</label>
                     <img className='current-pic' src={this.state.editPic} onError={this.addDefaultImg} alt='old profile pic'/>
-                    <button onClick={() => this.setState({changeUserInfo: !changeUserInfo})}>Cancel</button>
+                    <div className='profile-button-holder'>
+                        <button onClick={this.saveUser} >Save</button>
+                        <button onClick={() => this.setState({changeUserInfo: !changeUserInfo, editName: '', editPic: ''})}>Cancel</button>
+                    </div>
                     <button>Logout</button>
                 </div>
             )
@@ -77,4 +96,4 @@ class Profile extends Component {
 
 const mapStateToProps = state => {return {...state.userReducer}}
 
-export default connect(mapStateToProps, {})(Profile)
+export default connect(mapStateToProps, {saveUserInfo})(Profile)

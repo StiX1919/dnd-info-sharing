@@ -6,6 +6,7 @@ import axios from "axios";
 const GET_USER = "GET_USER"
 const SET_USER = "SET_USER"
 const PROFILE = "PROFILE"
+const SAVE_USER_INFO = "SAVE_USER_INFO"
 
 //Initial State
 
@@ -31,10 +32,16 @@ export function setUser(userInfo){
     }
 }
 
-
 export function openProfile() {
     return {
         type: PROFILE
+    }
+}
+
+export function saveUserInfo(info) {
+    return {
+        type:  SAVE_USER_INFO,
+        payload: axios.put('/api/updateUser', info)
     }
 }
 
@@ -49,6 +56,12 @@ export default function userReducer(state=initialState, action) {
 
         case PROFILE:
             return {...state, profile: !state.profile}
+
+        case SAVE_USER_INFO + '_PENDING':
+            return {...state, loading: true}
+
+        case SAVE_USER_INFO + '_FULFILLED':
+            return {...state, loading: false, user: action.payload.data}
             
         default:
             return state

@@ -4,7 +4,7 @@
     border-radius: 50%;
     margin-left: 20px;
     border: solid rgba(41, 41, 41, 0.897) 1px;
-    background-size: contain;
+    background-size: cover;
     padding: 0;
 
     background-color: rgb(221, 221, 221);
@@ -24,7 +24,7 @@
 }.reuse-button:active {
     border: solid black 1px;
     box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,1);
-    background-size: contain;
+    background-size: cover;
     height: 49px;
     width: 49px;
     padding: 0
