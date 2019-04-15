@@ -81,8 +81,8 @@ class Profile extends Component {
         } else {
             return (
                 <div className={profile ? 'profile-bar hidden' : 'profile-bar'}>
-                    <h1>Username:</h1>
-                    <h2>{user.username}</h2>
+                    <h2>Username:</h2>
+                    <h3>{user.username}</h3>
                     <img className='current-pic' src={user.user_image} onError={this.addDefaultImg} alt='current profile pic'/>
                     <button onClick={() => this.setState({changeUserInfo: !changeUserInfo})}>Update user Info</button>
                     <button>Logout</button>

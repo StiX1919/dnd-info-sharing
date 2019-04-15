@@ -157,3 +157,13 @@
     width: 50%;
     justify-content: space-around;
 }
+
+
+@media (max-width: 920px) {
+    .profile-bar {
+        width: 185px
+    }
+    .hidden {
+        animation: none
+    }
+}

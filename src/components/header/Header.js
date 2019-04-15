@@ -15,8 +15,10 @@ class Header extends Component {
 
     render(){
         let user_image
+        let style = {marginLeft: '20px'}
         if(this.props.user){
             user_image = this.props.user.user_image
+            style = {...style, backgroundImage: `url(${user_image ? user_image : 'https://wdcolledge.com/wp-content/uploads/2018/04/placeholder.png'})`}
         }
         return (
             <div className='header'>
@@ -24,8 +26,10 @@ class Header extends Component {
                 <h1 className='app-title'>Header</h1>
                 <div className='button-holder'>
                     {this.props.user 
-                        ? <Button buttFunc={this.props.openProfile} style={this.props.user ?{backgroundImage: `url(${user_image ? user_image : 'https://wdcolledge.com/wp-content/uploads/2018/04/placeholder.png'})`}: null}></Button>
-                        : <Button buttFunc={this.userLogin}>Login</Button>
+                        ? <Button 
+                            buttFunc={this.props.openProfile} 
+                            style={style}></Button>
+                        : <Button style={style} buttFunc={this.userLogin}>Login</Button>
                     }
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header'
+import TableBar from './components/tableBar/TableBar'
 import Profile from './components/profile/Profile'
 
 import axios from 'axios'
@@ -33,9 +34,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        {this.props.profile &&
-          <Profile />
-        }
+        <div>
+          {this.props.user &&
+            <TableBar />
+          }
+          {this.props.profile &&
+            <Profile />
+          }
+        </div>
       </div>
     );
   }
