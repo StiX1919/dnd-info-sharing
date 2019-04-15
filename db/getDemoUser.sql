@@ -1,1 +1,1 @@
-select * from users where username = 'Wank Ferret'
+select * from users where username = 'New Ferret'

@@ -7,6 +7,7 @@ const massive = require('massive')
 const passport = require('passport');
 
 const {updateUser} = require('./controllers/userController')
+const {getTables} = require('./controllers/tableController')
 
 const app = express()
 const auth = require('./authSetup')
@@ -58,6 +59,8 @@ app.get('/api/checkSession', (req, res) => {
 
 
 app.put('/api/updateUser', updateUser)
+
+app.get('/api/getTables')
 
 
 

@@ -12,7 +12,7 @@ const SAVE_USER_INFO = "SAVE_USER_INFO"
 
 const initialState = {
     testNum: 0,
-    isLoading: false,
+    loading: false,
     user: null,
     profile: false,
 

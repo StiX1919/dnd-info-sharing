@@ -38,6 +38,9 @@ class App extends Component {
           {this.props.user &&
             <TableBar />
           }
+          {this.props.tableModel &&
+            <h1>Hello tables</h1>
+          }
           {this.props.profile &&
             <Profile />
           }
@@ -47,6 +50,6 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({...state.userReducer})
+const mapStateToProps = state => ({...state.userReducer, tableModel: state.tableReducer.tableModel})
 
 export default connect(mapStateToProps, {setUser})(App);

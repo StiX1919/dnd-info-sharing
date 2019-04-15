@@ -1,0 +1,1 @@
+select * from table where created_by = $1
