@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import TabelModel from './TabelModel'
 import Button from '../toolComponents/Button'
 import {getTables, addTable} from '../../ducks/reducers/tableReducer'
 
@@ -14,18 +15,16 @@ class TableBar extends Component {
         }
     }
 
-
     render() {
         let style = {marginTop: '10px'}
         return (
             <div className='tables-bar'>
                 <Button buttFunc={this.props.addTable} title='Add new Table' style={style}>+</Button>
 
-
                 {/* model for adding new table*/}
                 {this.props.tableModel &&
-                    <div>Hello tables</div>
-                  }
+                    <TabelModel />
+                }
             </div>
         )
     }
