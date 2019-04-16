@@ -20,6 +20,12 @@ class TableBar extends Component {
         return (
             <div className='tables-bar'>
                 <Button buttFunc={this.props.addTable} title='Add new Table' style={style}>+</Button>
+
+
+                {/* model for adding new table*/}
+                {this.props.tableModel &&
+                    <div>Hello tables</div>
+                  }
             </div>
         )
     }
