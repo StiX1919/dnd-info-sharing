@@ -19,7 +19,7 @@ class Profile extends Component {
 
     handleChange = (e) => {
         let {name, value} = e.target
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({[name]: value})
     }
 
     addDefaultImg = (e) => {

@@ -28,12 +28,6 @@ class TableBar extends Component {
                 }
 
                 <Button buttFunc={this.props.addTable} title='Add new Table' style={style}>+</Button>
-
-
-                {/* model for adding new table*/}
-                {this.props.tableModel &&
-                    <TableModel />
-                }
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header/Header'
 import TableBar from './components/tableBar/TableBar'
 import Profile from './components/profile/Profile'
+import TableModel from './components/tableBar/TableModel'
 
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -42,11 +43,20 @@ class App extends Component {
             <Profile />
           }
         </div>
+
+
+
+
+
+        {/* model for adding new table*/}
+        {this.props.tableModel &&
+          <TableModel />
+        }
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({...state.userReducer})
+const mapStateToProps = state => ({...state.userReducer, tableModel: state.tableReducer.tableModel})
 
 export default connect(mapStateToProps, {setUser})(App);
