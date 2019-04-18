@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 
+import {connect} from 'react-redux'
+import {createTable} from '../../ducks/reducers/tableReducer'
+
 import './TableModel.css'
 
 class TableModel extends Component {
@@ -44,9 +47,13 @@ class TableModel extends Component {
                     onChange={this.handleChange}/>
                 <label htmlFor="prof-pic-input" className="table-pic-label">Table Image</label>
                 <img className='demo-t-pic' src={this.state.tableImage} onError={this.addDefaultImg} alt='old profile pic'/>
+
+                <button onClick={() => this.props.createTable(this.state)}>Create Table</button>
             </div>
         )
     }
 }
 
-export default TableModel
+const mapStateToProps = state => state.tableReducer
+
+export default connect(mapStateToProps, {createTable})(TableModel)

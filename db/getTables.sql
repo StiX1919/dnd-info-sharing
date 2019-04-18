@@ -1,1 +1,1 @@
-select * from table where created_by = $1
+select * from tables where created_by = $1

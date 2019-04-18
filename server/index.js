@@ -7,7 +7,7 @@ const massive = require('massive')
 const passport = require('passport');
 
 const {updateUser} = require('./controllers/userController')
-const {getTables} = require('./controllers/tableController')
+const {getTables, createTable} = require('./controllers/tableController')
 
 const app = express()
 const auth = require('./authSetup')
@@ -47,20 +47,21 @@ app.get('/api/login', passport.authenticate('auth0', {
     }
 )
 app.get('/api/checkSession', (req, res) => {
-    // if(req.session.passport){
-    //     res.status(200).send(req.session.passport.user)
-    // }
-    // else res.sendStatus(500)
+    if(req.session.passport){
+        res.status(200).send(req.session.passport.user)
+    }
+    else res.sendStatus(500)
 
-    req.app.get('db').getDemoUser().then(user => {
-        res.status(200).send(user[0])
-    })
+    // req.app.get('db').getDemoUser().then(user => {
+    //     res.status(200).send(user[0])
+    // })
 })
 
 
 app.put('/api/updateUser', updateUser)
 
-app.get('/api/getTables')
+app.get('/api/getTables', getTables)
+app.post('/api/createTable', createTable)
 
 
 

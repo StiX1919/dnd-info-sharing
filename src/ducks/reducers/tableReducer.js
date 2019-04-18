@@ -1,10 +1,12 @@
 import axios from "axios";
+import { log } from "util";
 
 
 //Action Constants
 
 const GET_TABLES = 'GET_TABLES'
 const ADD_TABLE = 'ADD_TABLE'
+const CREATE_TABLE = 'CREATE_TABLE'
 
 //Initial State
 
@@ -26,6 +28,13 @@ export function getTables() {
 export function addTable() {
     return {
         type: ADD_TABLE,
+    }
+}
+export function createTable(tableInfo) {
+    console.log('hit')
+    return {
+        type: CREATE_TABLE,
+        payload: axios.post('/api/createTable', tableInfo)
     }
 }
 
