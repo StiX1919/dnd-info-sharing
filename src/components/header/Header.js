@@ -4,7 +4,7 @@ import './Header.css'
 import logo from '../../logo'
 import {connect} from 'react-redux'
 import {openProfile} from '../../ducks/reducers/userReducer';
-import Button from '../toolComponents/Button'
+import Button from '../toolComponents/Button/Button'
 
 class Header extends Component {
 
@@ -29,7 +29,7 @@ class Header extends Component {
                         ? <Button 
                             buttFunc={this.props.openProfile} 
                             style={style}></Button>
-                        : <Button style={style} buttFunc={this.userLogin}>Login</Button>
+                        : <Button style={style} buttFunc={() => this.userLogin()}>Login</Button>
                     }
                 </div>
             </div>

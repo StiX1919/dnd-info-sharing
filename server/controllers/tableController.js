@@ -10,7 +10,7 @@ function createTable(req, res) {
     console.log(req.session, req.body)
 
     req.app.get('db').tables
-        .save({created_by: req.session.passport.user.username, table_name:req.body.tableName, table_image:req.body.tableImage, dm_image:req.session.passport.user.user_image})
+        .save({created_by: req.session.passport.user.user_id, table_name:req.body.tableName, table_image:req.body.tableImage, dm_image:req.session.passport.user.user_image})
         .then(response => {
             console.log(response)
         })

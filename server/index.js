@@ -32,8 +32,8 @@ app.use( passport.initialize() )
 app.use( passport.session() )
 passport.use( auth(app) );
 passport.serializeUser(function(user, done) {
-    let {username, user_image, uu_id} = user
-    done(null, {username, user_image, uu_id})
+    let {username, user_image, uu_id, user_id} = user
+    done(null, {username, user_image, uu_id, user_id})
 })
 passport.deserializeUser(function(obj, done) {
     done(null, obj)
