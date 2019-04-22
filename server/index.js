@@ -47,14 +47,14 @@ app.get('/api/login', passport.authenticate('auth0', {
     }
 )
 app.get('/api/checkSession', (req, res) => {
-    if(req.session.passport){
-        res.status(200).send(req.session.passport.user)
-    }
-    else res.sendStatus(500)
+    // if(req.session.passport){
+    //     res.status(200).send(req.session.passport.user)
+    // }
+    // else res.sendStatus(500)
 
-    // req.app.get('db').getDemoUser().then(user => {
-    //     res.status(200).send(user[0])
-    // })
+    req.app.get('db').getDemoUser().then(user => {
+        res.status(200).send(user[0])
+    })
 })
 
 

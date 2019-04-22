@@ -5,7 +5,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgb(238, 238, 238);
+    background-color: white;
 
     display: flex;
     flex-direction: column;
@@ -17,4 +17,38 @@
     /* height: 0; */
     /* margin-top: 15px; */
 
+}
+
+.selector {
+    background-color: rgb(238, 238, 238);
+}
+.tableButts {
+    z-index: 1
+}
+
+.top {
+    position: absolute;
+    top: 0;
+    height: 25px;
+    width: 100%;
+    z-index: 0;
+    border-bottom-right-radius: 50%
+}
+
+/* 60px between */
+.bottom {
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+    width: 100%;
+    z-index: 0;
+    border-top-right-radius: 50%
+}
+
+.side-color {
+    position: absolute;
+    background-color: rgb(238, 238, 238);
+    
+    height: 100%;
+    width: 50%;
 }
