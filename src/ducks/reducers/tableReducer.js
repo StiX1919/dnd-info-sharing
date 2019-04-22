@@ -45,15 +45,15 @@ export function createTable(tableInfo) {
 export default function tableReducer(state=initialState, action) {
     switch(action.type) {
         case ADD_TABLE:
-            return {...state, tableModel: true}
+            return {...state, tableModel: !state.tableModel}
         case GET_TABLES + '_PENDING':
             return {...state, loading: true}
         case GET_TABLES + '_FULFILLED':
             return {...state, tables: action.payload.data, loading: false}
-        case ADD_TABLE + '_PENDING':
+        case CREATE_TABLE + '_PENDING':
             return {...state, loading: true}
-        case ADD_TABLE + '_FULFILLED':
-            return {...state, tables: action.payload.data, loading: false}
+        case CREATE_TABLE + '_FULFILLED':
+            return {...state, tables: [...state.tables, {...action.payload.data}], loading: false, tableModel: false}
         default:
             return state
     }

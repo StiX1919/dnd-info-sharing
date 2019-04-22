@@ -79,7 +79,7 @@
     visibility: visible;
     z-index: 1;
     opacity: 1;
-    transform: translate3d(-150px, -35px, 0)
+    transform: translate3d(-146px, -35px, 0)
     scale(0.8);
     transition:
         transform 300ms,
@@ -120,7 +120,7 @@
     visibility: visible;
     z-index: 1;
     opacity: 1;
-    transform: translate3d(-135px, -35px, 0)
+    transform: translate3d(-145px, -35px, 0)
     scale(0.8);
     transition:
         transform 300ms,
@@ -141,4 +141,10 @@
 
     background-color: rgb(221, 221, 221)
     
+}
+
+@media (max-width: 1030px) {
+    .table-model {
+        width: 412px
+    }
 }

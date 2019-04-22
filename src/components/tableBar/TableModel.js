@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
-import {createTable} from '../../ducks/reducers/tableReducer'
+import {createTable, addTable} from '../../ducks/reducers/tableReducer'
+import Button from '../toolComponents/Button/Button'
 
 import './TableModel.css'
 
@@ -49,6 +50,9 @@ class TableModel extends Component {
                 <img className='demo-t-pic' src={this.state.tableImage} onError={this.addDefaultImg} alt='old profile pic'/>
 
                 <button onClick={() => this.props.createTable(this.state)}>Create Table</button>
+
+
+                <Button buttFunc={this.props.addTable} style={{width: '20px', height: '20px'}} class='close-model'>X</Button>
             </div>
         )
     }
@@ -56,4 +60,4 @@ class TableModel extends Component {
 
 const mapStateToProps = state => state.tableReducer
 
-export default connect(mapStateToProps, {createTable})(TableModel)
+export default connect(mapStateToProps, {createTable, addTable})(TableModel)

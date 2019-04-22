@@ -31,3 +31,10 @@
 }.reuse-button:focus {
     outline: none
 }
+
+
+.close-model {
+    position: absolute;
+    top: 5px;
+    right: 5px
+}
