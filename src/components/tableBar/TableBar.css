@@ -12,18 +12,43 @@
     align-items: center;
     /* justify-content: center; */
 }
+.empty {
+    width: 80px;
+    height: calc(100vh - 80px);
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(170, 170, 170);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
 
 .line-break {
     /* height: 0; */
     /* margin-top: 15px; */
-
+    z-index: 1
 }
 
 .selector {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(170, 170, 170);
+    z-index: -1
 }
 .tableButts {
-    z-index: 1
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    z-index: 1;
+    max-height: calc(100vh - 80px - 98px);
+    overflow-y: auto;
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    top: 80px;
 }
 
 .top {
@@ -31,8 +56,8 @@
     top: 0;
     height: 25px;
     width: 100%;
-    z-index: 0;
-    border-bottom-right-radius: 50%
+    z-index: -1;
+    border-bottom-right-radius: 50%;
 }
 
 /* 60px between */
@@ -41,14 +66,50 @@
     bottom: 0;
     height: 25px;
     width: 100%;
-    z-index: 0;
+    z-index: -1;
     border-top-right-radius: 50%
 }
 
 .side-color {
     position: absolute;
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(170, 170, 170);;
     
     height: 100%;
     width: 50%;
+    left: 0;
+    transition: .1s;
+    top: 0;
+    z-index: -1
+}
+
+.new-table-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: sticky;
+    bottom: 0; */
+
+    z-index: 1;
+
+    height: 98px;
+    width: 100%;
+    background-color: rgb(170, 170, 170);
+}
+
+.fancy-side-bar {
+    position: sticky;
+    width: 100%;
+    /* height: 100%; */
+    /* background-color: blue; */
+    bottom: 0;
+    /* min-height: 100%; */
+}
+
+.bottom-holder {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1
 }
