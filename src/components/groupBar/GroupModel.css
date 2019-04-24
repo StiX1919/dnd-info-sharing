@@ -1,4 +1,4 @@
-.table-model {
+.group-model {
     position: absolute;
     top: 30%;
     left: 30%;
@@ -23,7 +23,7 @@
 
 
 /* input styling */
-.table-input {
+.group-input {
     margin-bottom: 30px;
     margin-top: 20px;
     height: 30px;
@@ -38,15 +38,15 @@
     border: none;
     border-radius: 0.2rem;
     transition: box-shadow .25s;
-}.table-input::placeholder {
+}.group-input::placeholder {
     color: #B0BEC5
-}.table-input:focus {
+}.group-input:focus {
     outline: none;
     box-shadow: 1px 7px 10px -5px rgb(24, 24, 24);
 }
 
 /* labels */
-.table-name-label {
+.group-name-label {
     display: flex;
     justify-self: flex-start;
     margin-top: -50px;
@@ -70,12 +70,12 @@
 /* transform 300ms cubic-bezier(0.645, 0.045, 0.355, 1), */
 
 
-.t-name-text:placeholder-shown + .table-name-label {
+.t-name-text:placeholder-shown + .group-name-label {
     visibility: hidden;
     z-index: -1
 }
-.t-name-text:not(:placeholder-shown) + .table-name-label,
-.t-name-text:focus:not(:placeholder-shown) + .table-name-label {
+.t-name-text:not(:placeholder-shown) + .group-name-label,
+.t-name-text:focus:not(:placeholder-shown) + .group-name-label {
     visibility: visible;
     z-index: 1;
     opacity: 1;
@@ -88,7 +88,7 @@
 }
 
 
-.table-pic-label {
+.group-pic-label {
     display: block;
     margin-top: -50px;
     /* position: absolute; */
@@ -111,12 +111,12 @@
         z-index 0ms 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.t-pic-text:placeholder-shown + .table-pic-label {
+.t-pic-text:placeholder-shown + .group-pic-label {
     visibility: hidden;
     z-index: -1
 }
-.t-pic-text:not(:placeholder-shown) + .table-pic-label,
-.t-pic-text:focus:not(:placeholder-shown) + .table-pic-label {
+.t-pic-text:not(:placeholder-shown) + .group-pic-label,
+.t-pic-text:focus:not(:placeholder-shown) + .group-pic-label {
     visibility: visible;
     z-index: 1;
     opacity: 1;
@@ -139,11 +139,11 @@
     padding: 0;
     margin: 10px 0;
 
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(197, 197, 197);
 }
 
 @media (max-width: 1030px) {
-    .table-model {
+    .group-model {
         width: 412px
     }
 }

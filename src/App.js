@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header'
-import TableBar from './components/tableBar/TableBar'
+import GroupBar from './components/groupBar/GroupBar'
 import Profile from './components/profile/Profile'
-import TableModel from './components/tableBar/TableModel'
+import GroupModel from './components/groupBar/GroupModel'
 
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -37,7 +37,7 @@ class App extends Component {
         <Header />
         <div>
           {this.props.user &&
-            <TableBar />
+            <GroupBar />
           }
           {this.props.profile &&
             <Profile />
@@ -48,15 +48,15 @@ class App extends Component {
 
 
 
-        {/* model for adding new table*/}
-        {this.props.tableModel &&
-          <TableModel />
+        {/* model for adding new group*/}
+        {this.props.groupModel &&
+          <GroupModel />
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({...state.userReducer, tableModel: state.tableReducer.tableModel})
+const mapStateToProps = state => ({...state.userReducer, groupModel: state.groupReducer.groupModel})
 
 export default connect(mapStateToProps, {setUser})(App);

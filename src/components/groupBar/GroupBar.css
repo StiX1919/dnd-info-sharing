@@ -1,4 +1,4 @@
-.tables-bar {
+.groups-bar {
     width: 80px;
     height: calc(100vh - 80px);
 
@@ -19,7 +19,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(197, 197, 197);
 
     display: flex;
     flex-direction: column;
@@ -34,10 +34,10 @@
 }
 
 .selector {
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(197, 197, 197);
     z-index: -1
 }
-.tableButts {
+.groupButts {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -72,7 +72,7 @@
 
 .side-color {
     position: absolute;
-    background-color: rgb(170, 170, 170);;
+    background-color: rgb(197, 197, 197);;
     
     height: 100%;
     width: 50%;
@@ -82,7 +82,7 @@
     z-index: -1
 }
 
-.new-table-holder {
+.new-group-holder {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -94,7 +94,7 @@
 
     height: 98px;
     width: 100%;
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(197, 197, 197);
 }
 
 .fancy-side-bar {

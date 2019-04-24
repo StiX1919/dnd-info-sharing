@@ -1,0 +1,1 @@
+select * from groups where created_by = $1

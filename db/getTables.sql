@@ -1,1 +1,0 @@
-select * from tables where created_by = $1
