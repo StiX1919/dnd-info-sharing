@@ -7,13 +7,18 @@ function getGroups(req, res) {
 }
 
 function createGroup(req, res) {
-    console.log(req.session, req.body)
+    console.log('session', req.session)
+    const db = req.app.get('db')
 
-    req.app.get('db').groups
-        .save({created_by: req.session.passport.user.user_id, group_name:req.body.groupName, group_image:req.body.groupImage, dm_image:req.session.passport.user.user_image})
-        .then(response => {
-            res.status(200).send(response)
-        })
+    db.groups
+        .insert({created_by: req.session.passport.user.user_id, group_name:req.body.groupName, group_image:req.body.groupImage}).then(groupRes => {
+            console.log('g res', groupRes)
+            db.group_user.save({is_owner: true, group_id: groupRes.group_id, player_id: req.session.passport.user.user_id}).then(gUserRes => {
+                console.log('user res', gUserRes)
+            }).catch(err => console.log('user err', err))
+            res.status(200).send(groupRes)
+        }).catch(err => console.log('group err', err))
+        
 }
 
 

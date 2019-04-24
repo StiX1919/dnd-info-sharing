@@ -20,7 +20,7 @@ class GroupModel extends Component {
         this.setState({[name]: value})
     }
     addDefaultImg = (e) => {
-        e.target.src = 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-group-png-clipart_1926718.jpg'
+        e.target.src = 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'
     }
 
 
