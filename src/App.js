@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header'
 import GroupBar from './components/groupBar/GroupBar'
+// import RoomBar from './components/roomBar/RoomBar'
 import Profile from './components/profile/Profile'
 import GroupModel from './components/groupBar/GroupModel'
 
@@ -39,6 +40,7 @@ class App extends Component {
           {this.props.user &&
             <GroupBar />
           }
+          
           {this.props.profile &&
             <Profile />
           }

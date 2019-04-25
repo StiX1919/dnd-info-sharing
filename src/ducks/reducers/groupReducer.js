@@ -7,6 +7,7 @@ import { log } from "util";
 const GET_GROUPS = 'GET_GROUPS'
 const ADD_GROUP = 'ADD_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
+const GET_GROUP_ROOMS = 'GET_GROUP_ROOMS'
 
 //Initial State
 
@@ -14,8 +15,8 @@ const initialState = {
     loading: false,
     groups: [],
 
-    groupModel: false
-
+    groupModel: false,
+    rooms: []
 }
 //Action Creators
 
@@ -38,6 +39,16 @@ export function createGroup(groupInfo) {
     }
 }
 
+export function getGroupRooms (groupID){
+    const rooms = axios.get(`/api/groupRooms/${groupID}`).then(response => {
+        return response.data
+    });
+
+    return {
+        type: GET_GROUP_ROOMS,
+        payload: rooms
+    }
+}
 
 
 //User reducer
@@ -54,6 +65,8 @@ export default function groupReducer(state=initialState, action) {
             return {...state, loading: true}
         case CREATE_GROUP + '_FULFILLED':
             return {...state, groups: [...state.groups, {...action.payload.data}], loading: false, groupModel: false}
+        case GET_GROUP_ROOMS + '_FULFILLED':
+            return {...state, rooms: action.payload}
         default:
             return state
     }

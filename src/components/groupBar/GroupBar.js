@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Button from '../toolComponents/Button/Button'
 import GroupSelector from '../toolComponents/GroupSelector/GroupSelector'
-import {getGroups, addGroup} from '../../ducks/reducers/groupReducer'
+import {getGroups, addGroup, getGroupRooms} from '../../ducks/reducers/groupReducer'
 
 import './GroupBar.css'
 
@@ -64,11 +64,13 @@ class GroupBar extends Component {
     }
 
     selectGroup = (index) => {
+        // this.props.getGroupRooms(groupID)
         this.setState({selectedGroup: index})
     }
 
     render() {
         console.log(document.getElementsByClassName('new-group-holder'))
+        let txtRooms = <h2>Loading</h2>
         let {selectedGroup} = this.state
         let style = {marginTop: '15px'}
         let groupButts = this.props.groups.map((group, i, arr) => {
@@ -76,8 +78,13 @@ class GroupBar extends Component {
                 style = {...style, marginBottom: '15px'}
             }
             const {group_id, group_image, group_name} = group
-            return <GroupSelector key={group_id} index={i} buttFunc={this.selectGroup} class={this.state.selectedGroup === i && 'select'} title={group_name} style={{...style, zIndex: 1, backgroundImage: `url(${group_image ? group_image : 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'})`}}/>
+            return <GroupSelector key={group_id} id={group_id} index={i} buttFunc={this.selectGroup} class={this.state.selectedGroup === i && 'select'} title={group_name} style={{...style, zIndex: 1, backgroundImage: `url(${group_image ? group_image : 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'})`}}/>
         })
+        if(this.props.groups[0]){
+            txtRooms = this.props.groups[selectedGroup].rooms.map(room => {
+                return <h2>{room.name}</h2>
+            })
+        }
         return (
             <div className={this.props.groups[0] ? 'groups-bar' : 'groups-bar empty'}>
                 {this.props.groups[0] &&
@@ -92,18 +99,20 @@ class GroupBar extends Component {
                                 <div className='side-color'></div>
                             </BottomHolder>
                         </div>
-
-
+                        
                     </div>
-                }
-
-
-
+                }    
+                    
                 <div className='new-group-holder'>
                     <h4 className='line-break'>________</h4>
                     <Button buttFunc={this.props.addGroup}  title='Add new Group' style={style}>+</Button>
                 </div>
-                
+                    
+
+                {/*room styling*/}
+                <div className='roomButts'>
+                    
+                </div>
             </div>
         )
     }
@@ -112,4 +121,4 @@ class GroupBar extends Component {
 
 const mapStateToProps = state => ({...state.groupReducer, user: state.userReducer.user})
 
-export default connect(mapStateToProps, {getGroups, addGroup})(GroupBar)
+export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms})(GroupBar)

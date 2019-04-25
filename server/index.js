@@ -7,7 +7,7 @@ const massive = require('massive')
 const passport = require('passport');
 
 const {updateUser} = require('./controllers/userController')
-const {getGroups, createGroup} = require('./controllers/groupController')
+const {getGroups, createGroup, getGroupRooms} = require('./controllers/groupController')
 
 const app = express()
 const auth = require('./authSetup')
@@ -62,6 +62,7 @@ app.put('/api/updateUser', updateUser)
 
 app.get('/api/getGroups', getGroups)
 app.post('/api/createGroup', createGroup)
+app.get('/api/groupRooms/:id', getGroupRooms)
 
 
 
