@@ -10,51 +10,12 @@ import {getGroups, addGroup, getGroupRooms} from '../../ducks/reducers/groupRedu
 import './GroupBar.css'
 
 
-const DisplayBarTop = styled.div`
-    height: ${props => props.index * 67}px;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    transition: .25s;
-`
-const DisplayBarBottom = styled.div`
-    height: calc( 100% - ${props => 80 + (props.index * 67)}px);
-    /* height: 100% */
-    position: inherit;
-    width: 100%;
-    bottom: 0;
-    transition: .25s;
-`
-const CurveTop = styled.div`
-    margin-top: ${props => props.index * 67}px;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    transition: .25s;
-`
-const CurveBottom = styled.div`
-    bottom: calc( 100% - ${props => 80 + (props.index * 67)}px);
-    /* margin-bottom: 100% */
-    /* position: inherit; */
-    width: 100%;
-    /* bottom: 0; */
-    transition: .25s;
-`
-const BottomHolder = styled.div`
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: calc( 15px + ${props => (props.total * 67)}px);
-    z-index: -1;
-    min-height: 100%;
-`
-
-
 class GroupBar extends Component {
     constructor(){
         super()
         this.state = {
-            selectedGroup: 0
+            selectedGroup: 0,
+            selectedRoom: 0 
         }
     }
     componentDidMount(){
@@ -65,13 +26,17 @@ class GroupBar extends Component {
 
     selectGroup = (index) => {
         // this.props.getGroupRooms(groupID)
-        this.setState({selectedGroup: index})
+        this.setState({selectedGroup: index, selectedRoom: 0})
+    }
+    selectRoom = (index) => {
+        // this.props.getGroupRooms(groupID)
+        this.setState({selectedRoom: index})
     }
 
     render() {
         console.log(document.getElementsByClassName('new-group-holder'))
         let txtRooms = <h2>Loading</h2>
-        let {selectedGroup} = this.state
+        let {selectedGroup, selectedRoom} = this.state
         let style = {marginTop: '15px'}
         let groupButts = this.props.groups.map((group, i, arr) => {
             if(i === arr.length - 1){
@@ -81,8 +46,8 @@ class GroupBar extends Component {
             return <GroupSelector key={group_id} id={group_id} index={i} buttFunc={this.selectGroup} class={this.state.selectedGroup === i && 'select'} title={group_name} style={{...style, zIndex: 1, backgroundImage: `url(${group_image ? group_image : 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'})`}}/>
         })
         if(this.props.groups[0]){
-            txtRooms = this.props.groups[selectedGroup].rooms.map(room => {
-                return <h2>{room.name}</h2>
+            txtRooms = this.props.groups[selectedGroup].rooms.map((room, i) => {
+                return <h5 className={selectedRoom === i ? 'room-name selected' : 'room-name'} onClick={() => this.selectRoom(i)}>{room.name}</h5>
             })
         }
         return (
@@ -111,7 +76,18 @@ class GroupBar extends Component {
 
                 {/*room styling*/}
                 <div className='roomButts'>
-                    
+                    <div className='fancy-room-bar'>
+                        <h3 style={{marginTop: '15px'}}>{this.props.groups[0] ? this.props.groups[selectedGroup].group_name : null}</h3>
+                        {txtRooms}
+
+                        <RoomBarTop index={selectedRoom} className='room' ></RoomBarTop>
+                        <RoomCurveTop index={selectedRoom} className='room top'></RoomCurveTop>
+                        <BottomRoomHolder total={this.props.groups.length}>
+                            <RoomCurveBottom index={selectedRoom} total={this.props.groups.length} className='room bottom'></RoomCurveBottom>
+                            <RoomBarBottom index={selectedRoom}  className='room'></RoomBarBottom>
+                            <div className='side-room-color'></div>
+                        </BottomRoomHolder>
+                    </div>
                 </div>
             </div>
         )
@@ -122,3 +98,89 @@ class GroupBar extends Component {
 const mapStateToProps = state => ({...state.groupReducer, user: state.userReducer.user})
 
 export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms})(GroupBar)
+
+
+
+
+
+
+const DisplayBarTop = styled.div`
+height: ${props => props.index * 67}px;
+position: absolute;
+width: 100%;
+top: 0;
+transition: .25s;
+`
+const DisplayBarBottom = styled.div`
+height: calc( 100% - ${props => 80 + (props.index * 67)}px);
+/* height: 100% */
+position: inherit;
+width: 100%;
+bottom: 0;
+transition: .25s;
+`
+const CurveTop = styled.div`
+margin-top: ${props => props.index * 67}px;
+position: absolute;
+width: 100%;
+top: 0;
+transition: .25s;
+`
+const CurveBottom = styled.div`
+bottom: calc( 100% - ${props => 80 + (props.index * 67)}px);
+/* margin-bottom: 100% */
+/* position: inherit; */
+width: 100%;
+/* bottom: 0; */
+transition: .25s;
+`
+const BottomHolder = styled.div`
+position: absolute;
+top: 0;
+width: 100%;
+height: calc( 15px + ${props => (props.total * 67)}px);
+z-index: -1;
+min-height: 100%;
+`
+
+
+
+
+const RoomBarTop = styled.div`
+height: ${props => 35 + props.index * 30}px;
+position: absolute;
+width: 100%;
+top: 0;
+transition: .25s;
+`
+const RoomBarBottom = styled.div`
+height: calc( 100% - ${props => 80 + (props.index * 30)}px);
+/* height: 100% */
+position: inherit;
+width: 100%;
+bottom: 0;
+transition: .25s;
+`
+const RoomCurveTop = styled.div`
+margin-top: ${props => 35 + props.index * 30}px;
+position: absolute;
+width: 100%;
+top: 0;
+transition: .25s;
+`
+const RoomCurveBottom = styled.div`
+bottom: calc( 100% - ${props => 80 + (props.index * 30)}px);
+/* margin-bottom: 100% */
+/* position: inherit; */
+width: 100%;
+/* bottom: 0; */
+transition: .25s;
+`
+const BottomRoomHolder = styled.div`
+position: absolute;
+top: 0;
+width: 100%;
+height: calc( 15px + ${props => (props.total * 67)}px);
+z-index: -1;
+min-height: 100%;
+`
