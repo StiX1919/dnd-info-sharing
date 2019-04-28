@@ -149,7 +149,15 @@
     background-color: rgb(138, 138, 138);
     z-index: -1
 }
-
+.room-title {
+    margin-top: 15px;
+    background-color: rgb(37, 37, 37);
+    color: rgb(228, 228, 228);
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    padding: 20px 0;    
+    width: 40%
+}
 .room-name {
     margin-right: 20px;
     margin-top: 10px;

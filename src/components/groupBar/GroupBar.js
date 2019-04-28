@@ -77,7 +77,7 @@ class GroupBar extends Component {
                 {/*room styling*/}
                 <div className='roomButts'>
                     <div className='fancy-room-bar'>
-                        <h3 style={{marginTop: '15px'}}>{this.props.groups[0] ? this.props.groups[selectedGroup].group_name : null}</h3>
+                        <h3 className='room-title'>{this.props.groups[0] ? this.props.groups[selectedGroup].group_name : null}</h3>
                         {txtRooms}
 
                         <RoomBarTop index={selectedRoom} className='room' ></RoomBarTop>
