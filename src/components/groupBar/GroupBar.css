@@ -127,7 +127,7 @@
     max-height: calc(100vh - 80px);
     overflow-y: auto;
     position: absolute;
-    width: 400px;
+    width: 450px;
     height: 100%;
     /* background-color: rgb(100, 100, 100) */
     /* top: 80px; */
@@ -151,12 +151,13 @@
 }
 .room-title {
     margin-top: 15px;
-    background-color: rgb(37, 37, 37);
+    margin-right: 10px;
+    /* background-color: rgb(37, 37, 37);
     color: rgb(228, 228, 228);
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     padding: 20px 0;    
-    width: 40%
+    width: 40% */
 }
 .room-name {
     margin-right: 20px;
