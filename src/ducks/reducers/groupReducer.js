@@ -1,5 +1,4 @@
 import axios from "axios";
-import { log } from "util";
 
 
 //Action Constants
@@ -9,6 +8,8 @@ const ADD_GROUP = 'ADD_GROUP'
 const CREATE_GROUP = 'CREATE_GROUP'
 const GET_GROUP_ROOMS = 'GET_GROUP_ROOMS'
 
+const CURRENT_ROOM = 'CURRENT_ROOM'
+
 //Initial State
 
 const initialState = {
@@ -16,7 +17,8 @@ const initialState = {
     groups: [],
 
     groupModel: false,
-    rooms: []
+    rooms: [],
+    currentRoom: 0
 }
 //Action Creators
 
@@ -50,6 +52,13 @@ export function getGroupRooms (groupID){
     }
 }
 
+export function updateCurrentRoom( roomID ) {
+    return {
+        type: CURRENT_ROOM,
+        payload: roomID
+    }
+}
+
 
 //User reducer
 
@@ -60,13 +69,16 @@ export default function groupReducer(state=initialState, action) {
         case GET_GROUPS + '_PENDING':
             return {...state, loading: true}
         case GET_GROUPS + '_FULFILLED':
-            return {...state, groups: action.payload.data, loading: false}
+            return {...state, groups: action.payload.data, loading: false, currentRoom: action.payload.data[0].rooms[0].id}
         case CREATE_GROUP + '_PENDING':
             return {...state, loading: true}
         case CREATE_GROUP + '_FULFILLED':
             return {...state, groups: [...state.groups, {...action.payload.data}], loading: false, groupModel: false}
         case GET_GROUP_ROOMS + '_FULFILLED':
             return {...state, rooms: action.payload}
+        
+        case CURRENT_ROOM:
+            return {...state, currentRoom: action.payload}
         default:
             return state
     }

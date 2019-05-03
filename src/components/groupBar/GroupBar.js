@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Button from '../toolComponents/Button/Button'
 import GroupSelector from '../toolComponents/GroupSelector/GroupSelector'
-import {getGroups, addGroup, getGroupRooms} from '../../ducks/reducers/groupReducer'
+import {getGroups, addGroup, getGroupRooms, updateCurrentRoom} from '../../ducks/reducers/groupReducer'
 
 import './GroupBar.css'
 
@@ -27,10 +27,11 @@ class GroupBar extends Component {
     selectGroup = (index) => {
         // this.props.getGroupRooms(groupID)
         this.setState({selectedGroup: index, selectedRoom: 0})
+        this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
     }
-    selectRoom = (index) => {
-        // this.props.getGroupRooms(groupID)
+    selectRoom = (index, id) => {
         this.setState({selectedRoom: index})
+        this.props.updateCurrentRoom(id)
     }
 
     render() {
@@ -47,7 +48,7 @@ class GroupBar extends Component {
         })
         if(this.props.groups[0]){
             txtRooms = this.props.groups[selectedGroup].rooms.map((room, i) => {
-                return <h5 className={selectedRoom === i ? 'room-name selected' : 'room-name'} onClick={() => this.selectRoom(i)}>{room.name}</h5>
+                return <h5 className={selectedRoom === i ? 'room-name selected' : 'room-name'} onClick={() => this.selectRoom(i, room.id)}>{room.name}</h5>
             })
         }
         return (
@@ -89,6 +90,8 @@ class GroupBar extends Component {
                         </BottomRoomHolder>
                     </div>
                 </div>
+
+                
             </div>
         )
     }
@@ -97,7 +100,7 @@ class GroupBar extends Component {
 
 const mapStateToProps = state => ({...state.groupReducer, user: state.userReducer.user})
 
-export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms})(GroupBar)
+export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms, updateCurrentRoom})(GroupBar)
 
 
 

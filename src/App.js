@@ -4,6 +4,7 @@ import GroupBar from './components/groupBar/GroupBar'
 // import RoomBar from './components/roomBar/RoomBar'
 import Profile from './components/profile/Profile'
 import GroupModel from './components/groupBar/GroupModel'
+import ChatInput from './components/chatInput/ChatInput'
 
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -38,7 +39,11 @@ class App extends Component {
         <Header />
         <div>
           {this.props.user &&
-            <GroupBar />
+            <div>
+              <GroupBar />
+              
+              <ChatInput />
+            </div>
           }
           
           {this.props.profile &&

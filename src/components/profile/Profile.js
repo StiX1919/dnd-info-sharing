@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {saveUserInfo} from '../../ducks/reducers/userReducer'
 
 import './profile.css'
-import { ucs2 } from 'punycode';
+
 
 class Profile extends Component {
     constructor(){
