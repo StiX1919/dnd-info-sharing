@@ -19,7 +19,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       profile: false,
-      username: ''
+      username: '',
+      showing: true
     }
 
   }
@@ -31,16 +32,22 @@ class App extends Component {
       })
     }
   }
+  handleShowing = () => {
+    this.setState((prevState) => {
+      return {showing: !prevState.showing}
+    })
+  }
   
   render() {
-    console.log(this.props)
+    console.log(this.state)
     return (
       <div className="App">
         <Header />
         <div>
           {this.props.user &&
             <div>
-              <GroupBar />
+              <div className='bar-tab' onClick={this.handleShowing}></div>
+              <GroupBar hidden={this.state.showing}/>
               
               <ChatInput />
             </div>

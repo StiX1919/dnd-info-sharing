@@ -34,6 +34,24 @@
 }
 
 
+.bar-tab {
+  display: none
+}
+
+
+@media (max-width: 800px){
+  .bar-tab {
+    display: block;
+    position: absolute;
+
+    width: 50px;
+    height: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    background-color: blue
+  }
+}
 
 
 
