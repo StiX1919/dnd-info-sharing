@@ -20,7 +20,7 @@ class App extends Component {
       loggedIn: false,
       profile: false,
       username: '',
-      showing: true
+      showing: false
     }
 
   }
@@ -46,7 +46,7 @@ class App extends Component {
         <div>
           {this.props.user &&
             <div>
-              <div className='bar-tab' onClick={this.handleShowing}></div>
+              <div className={this.state.showing ? 'bar-tab open' : 'bar-tab'} onClick={this.handleShowing}></div>
               <GroupBar hidden={this.state.showing}/>
               
               <ChatInput />

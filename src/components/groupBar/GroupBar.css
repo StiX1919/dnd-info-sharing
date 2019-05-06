@@ -190,6 +190,15 @@
 
 
 
+@keyframes show {
+    from {
+        display: none;
+    }
+    to {
+        display: flex
+    }
+}
+
 
 @media (max-width: 800px) {
     .groups-bar {
@@ -199,6 +208,7 @@
         /* display: none */
     }
     .showing {
-        display: flex 
+        /* animation: show 1s forwards */
+        display: flex
     }
 }

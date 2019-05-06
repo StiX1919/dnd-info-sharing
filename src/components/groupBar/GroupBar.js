@@ -33,6 +33,9 @@ class GroupBar extends Component {
         this.setState({selectedRoom: index})
         this.props.updateCurrentRoom(id)
     }
+    findClassName = () => {
+        return this.props.hidden ? this.props.groups[0] ? 'groups-bar showing' : 'groups-bar empty showing' : this.props.groups[0] ? 'groups-bar' : 'groups-bar empty'
+    }
 
     render() {
         console.log(document.getElementsByClassName('new-group-holder'))
@@ -52,7 +55,7 @@ class GroupBar extends Component {
             })
         }
         return (
-            <div className={this.props.groups[0] ? 'groups-bar' : 'groups-bar empty'}>
+            <div className={this.findClassName()}>
                 {this.props.groups[0] &&
                     <div className='groupButts'>
                         <div className='fancy-side-bar'>
