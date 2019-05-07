@@ -11,5 +11,10 @@
 
 .main-input {
     height: 50%;
-    width: 75%
+    width: calc(100% - 450px)
+}
+.space {
+    min-width: 265px;
+    background-color: green;
+    height: 10px
 }

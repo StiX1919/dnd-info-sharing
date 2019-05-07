@@ -12,6 +12,7 @@ class ChatInput extends Component {
     render() {
         return (
             <div className='message-input'>
+                <span className='space'></span>
                 <input className='main-input' />
             </div>
         )
