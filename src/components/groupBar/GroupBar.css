@@ -162,7 +162,10 @@
 .room-name {
     margin-right: 20px;
     margin-top: 10px;
-    height: 20px
+    height: 20px;
+
+    box-sizing: border-box;
+    padding-top: 2px
 }
 .selected {
     background-color: rgb(68, 68, 68);
