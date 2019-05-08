@@ -9,7 +9,7 @@ const CREATE_GROUP = 'CREATE_GROUP'
 const GET_GROUP_ROOMS = 'GET_GROUP_ROOMS'
 
 const CURRENT_ROOM = 'CURRENT_ROOM'
-
+const CURRENT_GROUP = 'CURRENT_GROUP'
 //Initial State
 
 const initialState = {
@@ -18,7 +18,8 @@ const initialState = {
 
     groupModel: false,
     rooms: [],
-    currentRoom: 0
+    currentRoom: 0,
+    currentGroup: 0
 }
 //Action Creators
 
@@ -59,6 +60,13 @@ export function updateCurrentRoom( roomID ) {
     }
 }
 
+export function updateCurrentGroup( groupID, roomID ) {
+    return {
+        type: CURRENT_GROUP,
+        payload: {groupID, roomID}
+    }
+}
+
 
 //User reducer
 
@@ -69,7 +77,7 @@ export default function groupReducer(state=initialState, action) {
         case GET_GROUPS + '_PENDING':
             return {...state, loading: true}
         case GET_GROUPS + '_FULFILLED':
-            return {...state, groups: action.payload.data, loading: false, currentRoom: action.payload.data[0].rooms[0].id}
+            return {...state, groups: action.payload.data, loading: false, currentGroup: action.payload.data[0].group_id, currentRoom: action.payload.data[0].rooms[0].id}
         case CREATE_GROUP + '_PENDING':
             return {...state, loading: true}
         case CREATE_GROUP + '_FULFILLED':
@@ -79,6 +87,8 @@ export default function groupReducer(state=initialState, action) {
         
         case CURRENT_ROOM:
             return {...state, currentRoom: action.payload}
+        case CURRENT_GROUP:
+            return {...state, currentGroup: action.payload.groupID, currentRoom: action.payload.roomID}
         default:
             return state
     }

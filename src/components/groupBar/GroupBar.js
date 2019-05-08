@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Button from '../toolComponents/Button/Button'
 import GroupSelector from '../toolComponents/GroupSelector/GroupSelector'
-import {getGroups, addGroup, getGroupRooms, updateCurrentRoom} from '../../ducks/reducers/groupReducer'
+import {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup} from '../../ducks/reducers/groupReducer'
 
 import './GroupBar.css'
 
@@ -24,10 +24,11 @@ class GroupBar extends Component {
         }
     }
 
-    selectGroup = (index) => {
+    selectGroup = (index, id) => {
         // this.props.getGroupRooms(groupID)
         this.setState({selectedGroup: index, selectedRoom: 0})
-        this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
+        // this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
+        this.props.updateCurrentGroup(id, this.props.groups[index].rooms[0].id)
     }
     selectRoom = (index, id) => {
         this.setState({selectedRoom: index})
@@ -47,7 +48,7 @@ class GroupBar extends Component {
                 style = {...style, marginBottom: '15px'}
             }
             const {group_id, group_image, group_name} = group
-            return <GroupSelector key={group_id} id={group_id} index={i} buttFunc={this.selectGroup} class={this.state.selectedGroup === i && 'select'} title={group_name} style={{...style, zIndex: 1, backgroundImage: `url(${group_image ? group_image : 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'})`}}/>
+            return <GroupSelector key={group_id} id={group_id} index={i} buttFunc={() => this.selectGroup(i, group_id)} class={this.state.selectedGroup === i && 'select'} title={group_name} style={{...style, zIndex: 1, backgroundImage: `url(${group_image ? group_image : 'https://png.pngtree.com/png_detail/18/09/10/pngtree-brown-wooden-table-png-clipart_1926718.jpg'})`}}/>
         })
         if(this.props.groups[0]){
             txtRooms = this.props.groups[selectedGroup].rooms.map((room, i) => {
@@ -103,7 +104,7 @@ class GroupBar extends Component {
 
 const mapStateToProps = state => ({...state.groupReducer, user: state.userReducer.user})
 
-export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms, updateCurrentRoom})(GroupBar)
+export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup})(GroupBar)
 
 
 

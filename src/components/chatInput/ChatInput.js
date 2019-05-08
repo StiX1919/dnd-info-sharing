@@ -5,18 +5,22 @@ import {connect} from 'react-redux'
 import './chatInput.css'
 
 class ChatInput extends Component {
-    constructor(){
-        super()
-    }
 
 
     render() {
+        let name = 'loading'
+        const {groups, currentGroup, currentRoom} = this.props.groupReducer
+        console.log(this.props)
+        if(this.props.groupReducer.groups[0]){
+            name = groups.find((group) => group.group_id === currentGroup).rooms.find((room) => room.id === currentRoom).name
+            // [currentGroup].rooms[currentRoom]
+        }
         return (
             <div className='message-input'>
                 <div className='input-holder'>
                     <Button style={{height: '35px', width: '35px', marginRight: '10px'}}>+</Button>
-                    <h1 className='line-break'>|</h1>
-                    <input placeholder="What's on your mind?" className='main-input' />
+                    <div className='line-break-input'></div>
+                    <input placeholder={`message #${name}`} className='main-input' />
                 </div>
             </div>
         )
