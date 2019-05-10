@@ -63,8 +63,8 @@ app.get('/api/checkSession', (req, res) => {
     // req.app.get('db').getDemoUser().then(user => {
         //     res.status(200).send(user[0])
         // })
-    })
-    
+})
+    console.log(app.session, 'inserve')
     
     app.put('/api/updateUser', updateUser)
     
@@ -78,25 +78,38 @@ app.get('/api/checkSession', (req, res) => {
         console.log('We are live on port ', PORT_NUM)
     }))
     
-    
+    let interval;
     io.on('connection', (client) => {
-        client.on('subscribeToTimer', (interval) => {
-            console.log('Interval is ', interval)
-            setInterval(() => {
-                client.emit('timer', new Date())
-            }, interval)
+        console.log('new guy on')
+        if(interval){
+            clearInterval(interval)
+        }
+        interval = setInterval(() => console.log('in interval'), 2000)
+
+
+
+
+        client.on('updateRoom', async (id) => {
+
+            let db = app.get('db')
+            messages = await db.messages.where("room_id = $1", [id])
+            client.emit('newMessages', {messages})
+            
         })
 
-        client.on('updateRoom', (id) => {
-            client.emit('disconnect')
-            setInterval( async () => {
-                let db = app.get('db')
-                messages = await db.messages.where("room_id = $1", [id])
-                client.emit('newMessages', messages)
-            }, 1000)
+        client.on('newMessage', async(messageData) => {
+            const {room, message, time_stamp, userID} = messageData
+            const db = app.get('db')
+            await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
+            let messages = await db.messages.where("room_id = $1", [room])
 
+            io.sockets.emit('newMessages', {messages, room})
         })
-    
+        
+        client.on('disconnect', () => {
+            console.log('user disconnected')
+            io.emit('user disconnected')
+        })
     })
     
     

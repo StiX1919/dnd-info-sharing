@@ -100,11 +100,11 @@ export function postMessage( roomID, message, time ) {
 }
 
 
-export function newMessages( arr ) {
-    console.log('reducer', arr)
+export function newMessages( {messages, room} ) {
+    console.log(messages, room)
     return {
         type: NEW_MESSAGES,
-        payload: arr
+        payload: {messages, room}
     }
 }
 
@@ -138,7 +138,12 @@ export default function groupReducer(state=initialState, action) {
 
 
         case NEW_MESSAGES:
-            return {...state, messages: action.payload}
+            const {messages, room} = action.payload
+            console.log('reducer', messages, state.currentRoom, room)
+            if(state.currentRoom === action.payload.room){
+                return {...state, messages: action.payload.messages}
+            }
+            else return state
         default:
             return state
     }

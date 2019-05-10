@@ -1,17 +1,32 @@
 import openSocket from 'socket.io-client'
+import {newMessages} from './ducks/reducers/groupReducer'
 const socket = openSocket('http://localhost:3001')
 
+console.log('in api')
+
+// socket.on('newMessages', ({messages, room}) => {
+//     console.log('it happened', messages, room)
+//     newMessages({messages, room})
+// })
+
 function subscribeToTimer(cb) {
+    // socket.disconnect()
     socket.on('timer', timestamp => cb(null, timestamp))
     socket.emit('subscribeToTimer', 1000)
 }
 
 
 function roomMessages(roomID, cb) {
-    
-    console.log('api.js hit')
+
     socket.emit('updateRoom', roomID)
-    socket.on('newMessages', messages => cb(null, messages))
+    socket.on('newMessages', ({messages}) => cb(null, {messages, roomID}))
 }
 
-export {subscribeToTimer, roomMessages}
+
+function submitNewMessage(messageData, cb){
+    socket.emit('newMessage', messageData)
+
+    // socket.on('newMessages', messages => cb(null, messages))
+}
+
+export {subscribeToTimer, roomMessages, submitNewMessage}

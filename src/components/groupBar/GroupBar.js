@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
+import openSocket from 'socket.io-client'
 
 
 import Button from '../toolComponents/Button/Button'
@@ -22,18 +23,21 @@ class GroupBar extends Component {
         }
     }
     componentDidMount(){
+        // const socket = openSocket('http://localhost:3001')
+        // console.log(socket)
         if(this.props.user) {
             this.props.getGroups()
             // roomMessages(id, (err, messages) => {
             //     this.props.newMessages(messages)
             // })
         }
+        
     }
 
     selectGroup = (index, id) => {
         // this.props.getGroupRooms(groupID)
         this.setState({selectedGroup: index, selectedRoom: 0})
-        // this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
+        this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
         this.props.updateCurrentGroup(id, this.props.groups[index].rooms[0].id)
         roomMessages(this.props.groups[index].rooms[0].id, (err, messages) => {
             this.props.newMessages(messages)
@@ -41,7 +45,7 @@ class GroupBar extends Component {
     }
     selectRoom = (index, id) => {
         this.setState({selectedRoom: index})
-        // this.props.updateCurrentRoom(id)
+        this.props.updateCurrentRoom(id)
         roomMessages(id, (err, messages) => {
             this.props.newMessages(messages)
         })
@@ -51,7 +55,6 @@ class GroupBar extends Component {
     }
 
     render() {
-        console.log(document.getElementsByClassName('new-group-holder'))
         let txtRooms = <h2>Loading</h2>
         let {selectedGroup, selectedRoom} = this.state
         let style = {marginTop: '15px'}
