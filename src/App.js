@@ -5,6 +5,7 @@ import GroupBar from './components/groupBar/GroupBar'
 import Profile from './components/profile/Profile'
 import GroupModel from './components/groupBar/GroupModel'
 import ChatInput from './components/chatInput/ChatInput'
+import ChatRoom from './components/chatRoom/ChatRoom'
 
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -48,7 +49,7 @@ class App extends Component {
             <div>
               <div className={this.state.showing ? 'bar-tab open' : 'bar-tab'} onClick={this.handleShowing}></div>
               <GroupBar hidden={this.state.showing}/>
-              
+              <ChatRoom />
               <ChatInput />
             </div>
           }

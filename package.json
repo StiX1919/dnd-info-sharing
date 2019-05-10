@@ -9,6 +9,8 @@
     "express-session": "^1.15.6",
     "http-proxy-middleware": "^0.19.1",
     "massive": "^5.7.7",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.25",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
     "react": "^16.8.6",
@@ -21,6 +23,8 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "styled-components": "^4.2.0"
   },
   "proxy": "http://localhost:3001",

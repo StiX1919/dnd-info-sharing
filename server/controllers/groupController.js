@@ -42,10 +42,31 @@ async function getGroupRooms(req, res) {
 }
 
 
+async function postMessage(req, res) {
+    console.log(req.body)
+    const {message, roomID, time} = req.body
+
+    const db = req.app.get('db')
+
+    const messages = await db.messages.insert({created_by: req.session.passport.user.user_id, message: message, room_id: roomID, time_stamp: time})
+    console.log(messages)
+}
+
+async function getMessages( req, res) {
+    console.log(req.params)
+    const {id} = req.params
+    const db = req.app.get('db')
+
+    const messages = await db.messages.where("room_id = $1", [id])
+    res.status(200).send(messages)
+    console.log('all messages', messages)
+}
 
 
 module.exports = {
     getGroups,
     createGroup,
-    getGroupRooms
+    getGroupRooms,
+    postMessage,
+    getMessages
 }

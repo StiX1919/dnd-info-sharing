@@ -10,6 +10,9 @@ const GET_GROUP_ROOMS = 'GET_GROUP_ROOMS'
 
 const CURRENT_ROOM = 'CURRENT_ROOM'
 const CURRENT_GROUP = 'CURRENT_GROUP'
+
+const GET_MESSAGES = 'GET_MESSAGES'
+const POST_MESSAGE = 'POST_MESSAGE'
 //Initial State
 
 const initialState = {
@@ -19,7 +22,9 @@ const initialState = {
     groupModel: false,
     rooms: [],
     currentRoom: 0,
-    currentGroup: 0
+    currentGroup: 0,
+
+    messages: []
 }
 //Action Creators
 
@@ -68,6 +73,21 @@ export function updateCurrentGroup( groupID, roomID ) {
 }
 
 
+export function getMessages (id) {
+    return {
+        type: GET_MESSAGES,
+        payload: axios.get(`/api/getMessages/${id}`)
+    }
+}
+
+export function postMessage( roomID, message, time ) {
+    return {
+        type: POST_MESSAGE,
+        payload: axios.post('/api/postMessage', {roomID, message, time})
+    }
+}
+
+
 //User reducer
 
 export default function groupReducer(state=initialState, action) {
@@ -89,6 +109,11 @@ export default function groupReducer(state=initialState, action) {
             return {...state, currentRoom: action.payload}
         case CURRENT_GROUP:
             return {...state, currentGroup: action.payload.groupID, currentRoom: action.payload.roomID}
+        
+        case GET_MESSAGES + '_PENDING':
+            return {...state, loading: true, messages: []}
+        case GET_MESSAGES + '_FULFILLED':
+            return {...state, messages: action.payload.data, loading: false}
         default:
             return state
     }

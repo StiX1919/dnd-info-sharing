@@ -6,7 +6,7 @@
     bottom: 0;
 
     display: flex;
-    justify-content: flex-end
+    justify-content: flex-end;
 }
 
 .main-input {
@@ -15,9 +15,9 @@
     border-radius: 20px;
     border: 0;
     padding: 0;
-
+    
     background-color: #6B6D76;
-
+    
     outline: none;
     padding-left: 15px;
     /* padding-top: 5px; */
@@ -36,7 +36,8 @@
     height: 10px
 }
 .input-holder {
-    width: calc(100% - 207px);
+    margin: 10px;
+    width: calc(100% - 275px);
     height: 60%;
     display: flex;
     justify-content: center;
@@ -53,4 +54,10 @@
     height: 80%;
     width: 2px;
     background-color: black
+}
+
+@media (max-width: 800px) {
+    .input-holder {
+        width: 100%
+    }
 }

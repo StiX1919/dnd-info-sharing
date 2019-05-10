@@ -1,16 +1,35 @@
 import React, {Component} from 'react'
+import moment from 'moment'
+// import moment from 'moment-timezone'
 
 import Button from '../toolComponents/Button/Button'
 import {connect} from 'react-redux'
 import './chatInput.css'
 
-class ChatInput extends Component {
+import {postMessage} from '../../ducks/reducers/groupReducer'
 
+class ChatInput extends Component {
+    constructor(){
+        super()
+        this.state = {
+            inputVal: ''
+        }
+    }
+    handleChange = (e) => {
+        this.setState({inputVal: e.target.value})
+        
+        // console.log('timestamp', timestamp)
+        // console.log()
+    }
+    submit = () => {
+        let timestamp = moment().utc().format('MMMM Do YYYY, h:mm:ss a');
+        this.props.postMessage(this.props.groupReducer.currentRoom, this.state.inputVal, timestamp)
+        this.setState({inputVal: ''})
+    }
 
     render() {
         let name = 'loading'
         const {groups, currentGroup, currentRoom} = this.props.groupReducer
-        console.log(this.props)
         if(this.props.groupReducer.groups[0]){
             name = groups.find((group) => group.group_id === currentGroup).rooms.find((room) => room.id === currentRoom).name
             // [currentGroup].rooms[currentRoom]
@@ -20,7 +39,14 @@ class ChatInput extends Component {
                 <div className='input-holder'>
                     <Button style={{height: '35px', width: '35px', marginRight: '10px'}}>+</Button>
                     <div className='line-break-input'></div>
-                    <input placeholder={`message #${name}`} className='main-input' />
+                    <input placeholder={`message #${name}`} 
+                        className='main-input' 
+                        value={this.state.inputVal} 
+                        onKeyDown={(e) => {
+                            if(e.keyCode === 13 && this.state.inputVal)
+                            this.submit()
+                        }} 
+                        onChange={e => this.handleChange(e)} />
                 </div>
             </div>
         )
@@ -30,4 +56,4 @@ class ChatInput extends Component {
 
 const mapState = state => state
 
-export default connect(mapState, {})(ChatInput)
+export default connect(mapState, {postMessage})(ChatInput)
