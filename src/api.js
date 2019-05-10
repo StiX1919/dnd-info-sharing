@@ -19,7 +19,7 @@ function subscribeToTimer(cb) {
 function roomMessages(roomID, cb) {
 
     socket.emit('updateRoom', roomID)
-    socket.on('newMessages', ({messages}) => cb(null, {messages, roomID}))
+    socket.on('newMessages', ({messages, room}) => cb(null, {messages, room}))
 }
 
 
