@@ -6,4 +6,12 @@ function subscribeToTimer(cb) {
     socket.emit('subscribeToTimer', 1000)
 }
 
-export {subscribeToTimer}
+
+function roomMessages(roomID, cb) {
+    
+    console.log('api.js hit')
+    socket.emit('updateRoom', roomID)
+    socket.on('newMessages', messages => cb(null, messages))
+}
+
+export {subscribeToTimer, roomMessages}

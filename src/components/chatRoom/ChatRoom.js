@@ -8,12 +8,12 @@ import { subscribeToTimer } from '../../api'
 function ChatRoom (props) {
     let [state, setState] = useState({timestamp: 'none yet'})
 
-    // console.log(props)
-
     useEffect(() => {
-        subscribeToTimer((err, timestamp) => {
-            setState({timestamp})
-        })
+        // console.log(props)
+    
+        // subscribeToTimer((err, timestamp) => {
+        //     setState({timestamp})
+        // })
         console.log('effect hit')
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)

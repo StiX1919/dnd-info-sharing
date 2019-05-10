@@ -14,6 +14,8 @@ const app = express()
 const auth = require('./authSetup')
 const {PORT_NUM, SESSION_SECRET} = process.env
 
+let messages = []
+
 app.use(express.json())
 massive(process.env.CONNECTION_STRING)
 .then(db => {
@@ -83,6 +85,16 @@ app.get('/api/checkSession', (req, res) => {
             setInterval(() => {
                 client.emit('timer', new Date())
             }, interval)
+        })
+
+        client.on('updateRoom', (id) => {
+            client.emit('disconnect')
+            setInterval( async () => {
+                let db = app.get('db')
+                messages = await db.messages.where("room_id = $1", [id])
+                client.emit('newMessages', messages)
+            }, 1000)
+
         })
     
     })

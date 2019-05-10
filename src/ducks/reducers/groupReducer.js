@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import {roomMessages} from '../../api'
+
 
 //Action Constants
 
@@ -13,6 +15,8 @@ const CURRENT_GROUP = 'CURRENT_GROUP'
 
 const GET_MESSAGES = 'GET_MESSAGES'
 const POST_MESSAGE = 'POST_MESSAGE'
+
+const NEW_MESSAGES = 'NEW_MESSAGES'
 //Initial State
 
 const initialState = {
@@ -29,9 +33,17 @@ const initialState = {
 //Action Creators
 
 export function getGroups() {
-    return {
-        type: GET_GROUPS,
-        payload: axios.get('/api/getGroups')
+    return (dispatch) => {
+        dispatch({
+            type: GET_GROUPS,
+            payload: axios.get('/api/getGroups').then(res => {
+                roomMessages(res.data[0].rooms[0].id, (err, messages) => {
+                    dispatch(newMessages(messages))
+                })
+    
+                return res
+            })
+        })
     }
 }
 export function addGroup() {
@@ -88,6 +100,15 @@ export function postMessage( roomID, message, time ) {
 }
 
 
+export function newMessages( arr ) {
+    console.log('reducer', arr)
+    return {
+        type: NEW_MESSAGES,
+        payload: arr
+    }
+}
+
+
 //User reducer
 
 export default function groupReducer(state=initialState, action) {
@@ -114,6 +135,10 @@ export default function groupReducer(state=initialState, action) {
             return {...state, loading: true, messages: []}
         case GET_MESSAGES + '_FULFILLED':
             return {...state, messages: action.payload.data, loading: false}
+
+
+        case NEW_MESSAGES:
+            return {...state, messages: action.payload}
         default:
             return state
     }

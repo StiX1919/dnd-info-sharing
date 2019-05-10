@@ -5,9 +5,12 @@ import styled from 'styled-components'
 
 import Button from '../toolComponents/Button/Button'
 import GroupSelector from '../toolComponents/GroupSelector/GroupSelector'
-import {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup} from '../../ducks/reducers/groupReducer'
+import {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup, newMessages} from '../../ducks/reducers/groupReducer'
 
 import './GroupBar.css'
+
+import { roomMessages } from '../../api'
+
 
 
 class GroupBar extends Component {
@@ -21,6 +24,9 @@ class GroupBar extends Component {
     componentDidMount(){
         if(this.props.user) {
             this.props.getGroups()
+            // roomMessages(id, (err, messages) => {
+            //     this.props.newMessages(messages)
+            // })
         }
     }
 
@@ -29,10 +35,16 @@ class GroupBar extends Component {
         this.setState({selectedGroup: index, selectedRoom: 0})
         // this.props.updateCurrentRoom(this.props.groups[index].rooms[0].id)
         this.props.updateCurrentGroup(id, this.props.groups[index].rooms[0].id)
+        roomMessages(this.props.groups[index].rooms[0].id, (err, messages) => {
+            this.props.newMessages(messages)
+        })
     }
     selectRoom = (index, id) => {
         this.setState({selectedRoom: index})
-        this.props.updateCurrentRoom(id)
+        // this.props.updateCurrentRoom(id)
+        roomMessages(id, (err, messages) => {
+            this.props.newMessages(messages)
+        })
     }
     findClassName = () => {
         return this.props.hidden ? this.props.groups[0] ? 'groups-bar showing' : 'groups-bar empty showing' : this.props.groups[0] ? 'groups-bar' : 'groups-bar empty'
@@ -104,7 +116,7 @@ class GroupBar extends Component {
 
 const mapStateToProps = state => ({...state.groupReducer, user: state.userReducer.user})
 
-export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup})(GroupBar)
+export default connect(mapStateToProps, {getGroups, addGroup, getGroupRooms, updateCurrentRoom, updateCurrentGroup, newMessages})(GroupBar)
 
 
 

@@ -8,6 +8,7 @@ import './chatInput.css'
 
 import {postMessage} from '../../ducks/reducers/groupReducer'
 
+
 class ChatInput extends Component {
     constructor(){
         super()
