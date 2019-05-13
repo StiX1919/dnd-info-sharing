@@ -17,14 +17,17 @@ function ChatRoom (props) {
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)
         }
-        roomRef.current.scrollHeight = roomRef.current.scrollTop
+        console.log('above if', roomRef.current.scrollHeight, roomRef.current.clientHeight)
+        if(roomRef.current.scrollHeight !== roomRef.current.scrollTop){
+            scrollToBottom()
+        }
     }, [props.groupReducer.currentRoom]);
     
 
     let messages = props.groupReducer.messages.map(message => {
         let time = moment.parseZone(message.time_stamp, 'MMMM Do YYYY, h:mm:ss a').utc().fromNow()
         return (
-            <div>
+            <div className='message-info'>
                 <h1>{message.message}</h1>
                 <h4>{time}</h4>
             </div>
@@ -33,8 +36,6 @@ function ChatRoom (props) {
     console.log(state)
     return (
         <div className='chat-room'>
-            <div className='chat-break'>
-            </div>
             <div ref={roomRef}  className='messages'>
                 {messages}
             </div>
