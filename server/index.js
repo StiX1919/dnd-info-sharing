@@ -74,6 +74,9 @@ app.get('/api/checkSession', (req, res) => {
     
     app.get('/api/getMessages/:id', getMessages)
     app.post('/api/postMessage', postMessage)
+
+
+    
     const io = socket(app.listen(PORT_NUM, () => {
         console.log('We are live on port ', PORT_NUM)
     }))

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux';
 import { getMessages } from '../../ducks/reducers/groupReducer'
 import moment from 'moment'
@@ -10,13 +10,14 @@ import './chatRoom.css'
 
 function ChatRoom (props) {
     let [state, setState] = useState({timestamp: 'none yet'})
+    const roomRef = useRef(null)
 
     useEffect(() => {
         console.log('effect hit')
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)
         }
-        scrollToBottom()
+        roomRef.current.scrollHeight = roomRef.current.scrollTop
     }, [props.groupReducer.currentRoom]);
     
 
@@ -32,7 +33,9 @@ function ChatRoom (props) {
     console.log(state)
     return (
         <div className='chat-room'>
-            <div id='chat-room'  className='messages'>
+            <div className='chat-break'>
+            </div>
+            <div ref={roomRef}  className='messages'>
                 {messages}
             </div>
         </div>
