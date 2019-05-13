@@ -1,6 +1,9 @@
 import openSocket from 'socket.io-client'
 import {newMessages} from './ducks/reducers/groupReducer'
+import { animateScroll } from "react-scroll";
 const socket = openSocket('http://localhost:3001')
+
+
 
 console.log('in api')
 
@@ -29,4 +32,10 @@ function submitNewMessage(messageData, cb){
     // socket.on('newMessages', messages => cb(null, messages))
 }
 
-export {subscribeToTimer, roomMessages, submitNewMessage}
+
+function scrollToBottom() {
+    animateScroll.scrollToBottom({
+      containerId: "chat-room"
+    });
+}
+export {subscribeToTimer, roomMessages, submitNewMessage, scrollToBottom}

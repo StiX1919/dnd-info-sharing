@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { getMessages } from '../../ducks/reducers/groupReducer'
 import moment from 'moment'
 
-import { subscribeToTimer } from '../../api'
+
+
+import { scrollToBottom } from '../../api'
+import './chatRoom.css'
 
 function ChatRoom (props) {
     let [state, setState] = useState({timestamp: 'none yet'})
 
     useEffect(() => {
-        // console.log(props)
-    
-        // subscribeToTimer((err, timestamp) => {
-        //     setState({timestamp})
-        // })
         console.log('effect hit')
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)
         }
-    }, [props.groupReducer.currentRoom])
+        scrollToBottom()
+    }, [props.groupReducer.currentRoom]);
+    
 
     let messages = props.groupReducer.messages.map(message => {
         let time = moment.parseZone(message.time_stamp, 'MMMM Do YYYY, h:mm:ss a').utc().fromNow()
@@ -32,7 +32,9 @@ function ChatRoom (props) {
     console.log(state)
     return (
         <div className='chat-room'>
-            {messages}
+            <div id='chat-room'  className='messages'>
+                {messages}
+            </div>
         </div>
     )
 }

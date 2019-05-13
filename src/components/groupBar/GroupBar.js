@@ -42,6 +42,7 @@ class GroupBar extends Component {
         roomMessages(this.props.groups[index].rooms[0].id, (err, messages) => {
             this.props.newMessages(messages)
         })
+
     }
     selectRoom = (index, id) => {
         this.setState({selectedRoom: index})
@@ -49,6 +50,8 @@ class GroupBar extends Component {
         roomMessages(id, (err, messages) => {
             this.props.newMessages(messages)
         })
+
+
     }
     findClassName = () => {
         return this.props.hidden ? this.props.groups[0] ? 'groups-bar showing' : 'groups-bar empty showing' : this.props.groups[0] ? 'groups-bar' : 'groups-bar empty'

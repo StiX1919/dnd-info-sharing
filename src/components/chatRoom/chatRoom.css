@@ -1,0 +1,19 @@
+.chat-room {
+    width: 100%;
+    height: calc(100vh - 160px);
+    background-color: green;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    overflow: hidden;
+}
+
+.messages {
+    /* position: relative; */
+    overflow: scroll;
+    bottom: 0;
+
+    max-height: 100%
+
+}
