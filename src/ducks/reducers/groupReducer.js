@@ -52,7 +52,7 @@ export function addGroup() {
     }
 }
 export function createGroup(groupInfo) {
-    console.log('hit')
+    // console.log('hit')
     return {
         type: CREATE_GROUP,
         payload: axios.post('/api/createGroup', groupInfo)
@@ -101,7 +101,7 @@ export function postMessage( roomID, message, time ) {
 
 
 export function newMessages( {messages, room} ) {
-    console.log(messages, room)
+    // console.log(messages, room)
     return {
         type: NEW_MESSAGES,
         payload: {messages, room}
@@ -139,7 +139,7 @@ export default function groupReducer(state=initialState, action) {
 
         case NEW_MESSAGES:
             const {messages, room} = action.payload
-            console.log('reducer', messages, state.currentRoom, room)
+            // console.log('reducer', messages, state.currentRoom, room)
             if(state.currentRoom === action.payload.room){
                 return {...state, messages: action.payload.messages}
             }

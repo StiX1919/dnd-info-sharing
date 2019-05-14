@@ -32,10 +32,4 @@ function submitNewMessage(messageData, cb){
     // socket.on('newMessages', messages => cb(null, messages))
 }
 
-
-function scrollToBottom() {
-    animateScroll.scrollToBottom({
-      containerId: "chat-room"
-    });
-}
-export {subscribeToTimer, roomMessages, submitNewMessage, scrollToBottom}
+export {subscribeToTimer, roomMessages, submitNewMessage}

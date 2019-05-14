@@ -4,25 +4,23 @@ import { getMessages } from '../../ducks/reducers/groupReducer'
 import moment from 'moment'
 
 
-
-import { scrollToBottom } from '../../api'
 import './chatRoom.css'
 
 function ChatRoom (props) {
     let [state, setState] = useState({timestamp: 'none yet'})
-    const roomRef = useRef(null)
+    const messagesEnd = useRef(null)
 
-    useEffect(() => {
+    useEffect( () => {
         console.log('effect hit')
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)
         }
-        console.log('above if', roomRef.current.scrollHeight, roomRef.current.clientHeight)
-        if(roomRef.current.scrollHeight !== roomRef.current.scrollTop){
-            scrollToBottom()
-        }
+        scrollToBottom()
     }, [props.groupReducer.currentRoom]);
     
+    function scrollToBottom() {
+        messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+    }
 
     let messages = props.groupReducer.messages.map(message => {
         let time = moment.parseZone(message.time_stamp, 'MMMM Do YYYY, h:mm:ss a').utc().fromNow()
@@ -33,11 +31,13 @@ function ChatRoom (props) {
             </div>
         )
     })
-    console.log(state)
+    // console.log(state)
     return (
         <div className='chat-room'>
-            <div ref={roomRef}  className='messages'>
+        <div  id='messages' className='messages'>
+            <button onClick={scrollToBottom}/>
                 {messages}
+                <div style={{height: '10px', width: '100px'}} ref={messagesEnd}></div>
             </div>
         </div>
     )
