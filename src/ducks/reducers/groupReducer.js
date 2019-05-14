@@ -132,12 +132,12 @@ export default function groupReducer(state=initialState, action) {
             return {...state, groups: [...state.groups, {...action.payload.data}], loading: false, groupModel: false}
         case GET_GROUP_ROOMS + '_FULFILLED':
             return {...state, rooms: action.payload}
-        
+
         case CURRENT_ROOM:
             return {...state, currentRoom: action.payload}
         case CURRENT_GROUP:
             return {...state, currentGroup: action.payload.groupID, currentRoom: action.payload.roomID}
-        
+
         case GET_MESSAGES + '_PENDING':
             return {...state, loading: true, messages: []}
         case GET_MESSAGES + '_FULFILLED':
@@ -145,13 +145,11 @@ export default function groupReducer(state=initialState, action) {
 
 
         case NEW_MESSAGES:
-            // console.log('reducer', messages, state.currentRoom, room)
             if(state.currentRoom === action.payload.room){
                 return {...state, messages: action.payload.messages}
             }
             else return state
         case NEW_MESSAGE:
-            console.log(action.payload)
             if(state.currentRoom === action.payload.room){
                 return {...state, messages: [...state.messages, action.payload.newMessage]}
             }
@@ -159,5 +157,4 @@ export default function groupReducer(state=initialState, action) {
         default:
             return state
     }
-
 }
