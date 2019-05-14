@@ -11,6 +11,11 @@ function MessagesHolder (props) {
     const messagesEnd = useRef(null)
     const wrapper = useRef(null)
 
+    // let className = 'messages'
+    // if(props.groupReducer.messages.length * 154 < wrapper.current.parentElement.clientHeight){
+    //     className = 'messages few-mess'
+    // }
+
     useEffect( () => {
         const {scrollHeight, parentElement} = wrapper.current
         if(scrollHeight === (154 + parentElement.scrollTop + parentElement.clientHeight)){
@@ -37,10 +42,9 @@ function MessagesHolder (props) {
     })
     console.log(count)
     return (
-        <div ref={wrapper} id='messages' className='messages'>
-            <button onClick={scrollToBottom}/>
+        <div ref={wrapper} id='messages' className={wrapper.current ?`messages ${props.groupReducer.messages.length * 154 < wrapper.current.parentElement.clientHeight && 'few-mess'}` : 'messages'}>
             {messages}
-            <div style={{height: '10px', width: '100px'}} ref={messagesEnd}></div>
+            <div style={{width: '100px'}} ref={messagesEnd}></div>
         </div>
     )
 }
