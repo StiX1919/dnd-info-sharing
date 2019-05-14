@@ -6,7 +6,7 @@ import Button from '../toolComponents/Button/Button'
 import {connect} from 'react-redux'
 import './chatInput.css'
 
-import {postMessage, newMessages} from '../../ducks/reducers/groupReducer'
+import {postMessage, newMessages, newMessage} from '../../ducks/reducers/groupReducer'
 import {submitNewMessage} from '../../api'
 
 
@@ -27,7 +27,8 @@ class ChatInput extends Component {
         let timestamp = moment().utc().format('MMMM Do YYYY, h:mm:ss a');
         // this.props.postMessage(this.props.groupReducer.currentRoom, this.state.inputVal, timestamp)
         submitNewMessage({userID:this.props.userReducer.user.user_id ,room: this.props.groupReducer.currentRoom, message: this.state.inputVal, time_stamp: timestamp}, (err, messages) => {
-            // this.props.newMessages(messages)
+            console.log(messages)
+            this.props.newMessage(messages)
         })
         this.setState({inputVal: ''})
     }
@@ -61,4 +62,4 @@ class ChatInput extends Component {
 
 const mapState = state => state
 
-export default connect(mapState, {postMessage, newMessages})(ChatInput)
+export default connect(mapState, {postMessage, newMessages, newMessage})(ChatInput)

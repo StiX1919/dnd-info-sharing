@@ -17,6 +17,7 @@ const GET_MESSAGES = 'GET_MESSAGES'
 const POST_MESSAGE = 'POST_MESSAGE'
 
 const NEW_MESSAGES = 'NEW_MESSAGES'
+const NEW_MESSAGE = 'NEW_MESSAGE'
 //Initial State
 
 const initialState = {
@@ -107,7 +108,13 @@ export function newMessages( {messages, room} ) {
         payload: {messages, room}
     }
 }
-
+export function newMessage( {newMessage, room} ) {
+    // console.log(messages, room)
+    return {
+        type: NEW_MESSAGE,
+        payload: {newMessage, room}
+    }
+}
 
 //User reducer
 
@@ -138,10 +145,15 @@ export default function groupReducer(state=initialState, action) {
 
 
         case NEW_MESSAGES:
-            const {messages, room} = action.payload
             // console.log('reducer', messages, state.currentRoom, room)
             if(state.currentRoom === action.payload.room){
                 return {...state, messages: action.payload.messages}
+            }
+            else return state
+        case NEW_MESSAGE:
+            console.log(action.payload)
+            if(state.currentRoom === action.payload.room){
+                return {...state, messages: [...state.messages, action.payload.newMessage]}
             }
             else return state
         default:

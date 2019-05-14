@@ -29,7 +29,7 @@ function roomMessages(roomID, cb) {
 function submitNewMessage(messageData, cb){
     socket.emit('newMessage', messageData)
 
-    // socket.on('newMessages', messages => cb(null, messages))
+    socket.on('newMessage', messages => cb(null, messages))
 }
 
 export {subscribeToTimer, roomMessages, submitNewMessage}

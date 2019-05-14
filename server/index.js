@@ -76,7 +76,7 @@ app.get('/api/checkSession', (req, res) => {
     app.post('/api/postMessage', postMessage)
 
 
-    
+
     const io = socket(app.listen(PORT_NUM, () => {
         console.log('We are live on port ', PORT_NUM)
     }))
@@ -103,10 +103,10 @@ app.get('/api/checkSession', (req, res) => {
         client.on('newMessage', async(messageData) => {
             const {room, message, time_stamp, userID} = messageData
             const db = app.get('db')
-            await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
-            let messages = await db.messages.where("room_id = $1", [room])
-
-            io.sockets.emit('newMessages', {messages, room})
+            let newMessage = await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
+            // let messages = await db.messages.where("room_id = $1", [room])
+            console.log(newMessage)
+            io.sockets.emit('newMessage', {newMessage, room})
         })
         
         client.on('disconnect', () => {
