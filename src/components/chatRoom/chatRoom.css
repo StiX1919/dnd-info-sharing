@@ -16,10 +16,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    
+    /* justify-content: flex-end */
 
 }
-
 .chat-break {
     width: 355px;
     height: calc(100vh - 160px);
