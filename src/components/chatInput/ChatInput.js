@@ -27,10 +27,15 @@ class ChatInput extends Component {
         let timestamp = moment().utc().format('MMMM Do YYYY, h:mm:ss a');
         // this.props.postMessage(this.props.groupReducer.currentRoom, this.state.inputVal, timestamp)
         submitNewMessage({userID:this.props.userReducer.user.user_id ,room: this.props.groupReducer.currentRoom, message: this.state.inputVal, time_stamp: timestamp}, (err, messages) => {
-            console.log(messages)
+            console.log('MESSAGES: ', messages)
             this.props.newMessage(messages)
         })
         this.setState({inputVal: ''})
+    }
+
+    handleKeyDown = (e) => {
+        if(e.keyCode === 13 && this.state.inputVal)
+        this.submit()
     }
 
     render() {
@@ -48,10 +53,7 @@ class ChatInput extends Component {
                     <input placeholder={`message #${name}`} 
                         className='main-input' 
                         value={this.state.inputVal} 
-                        onKeyDown={(e) => {
-                            if(e.keyCode === 13 && this.state.inputVal)
-                            this.submit()
-                        }} 
+                        onKeyDown={this.handleKeyDown} 
                         onChange={e => this.handleChange(e)} />
                 </div>
             </div>

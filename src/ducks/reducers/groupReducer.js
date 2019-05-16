@@ -108,11 +108,11 @@ export function newMessages( {messages, room} ) {
         payload: {messages, room}
     }
 }
-export function newMessage( {newMessage, room} ) {
-    // console.log(messages, room)
+export function newMessage( {updatedMessage, room} ) {
+    console.log('WORK: ', updatedMessage, room)
     return {
         type: NEW_MESSAGE,
-        payload: {newMessage, room}
+        payload: {newMessage: updatedMessage, room}
     }
 }
 

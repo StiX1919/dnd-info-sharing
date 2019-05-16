@@ -14,8 +14,6 @@ const app = express()
 const auth = require('./authSetup')
 const {PORT_NUM, SESSION_SECRET} = process.env
 
-let messages = []
-
 app.use(express.json())
 massive(process.env.CONNECTION_STRING)
 .then(db => {
@@ -76,9 +74,9 @@ const io = socket(app.listen(PORT_NUM, () => {
 
 io.on('connection', (client) => {
     console.log('new guy on')
-
+    
     client.on('updateRoom', async (id) => {
-
+        let messages;
         let db = app.get('db')
         messages = await db.messages.find({room_id: id}, {limit:20, order: [{field:"message_id", direction:"desc"}]})
         // console.log(messages, messages.reverse())
@@ -86,11 +84,13 @@ io.on('connection', (client) => {
     })
 
     client.on('newMessage', async(messageData) => {
+
+        console.dir(client.listenerCount())
         const {room, message, time_stamp, userID} = messageData
         const db = app.get('db')
-        let newMessage = await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
-        console.log('newMessage')
-        io.sockets.emit('newMessage', {newMessage, room})
+        let updatedMessage = await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
+        console.log(client.id);
+        io.emit('newEmitMessage', {updatedMessage, room})
     })
         
     client.on('disconnect', () => {

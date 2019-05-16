@@ -29,8 +29,9 @@ function roomMessages(roomID, cb) {
 function submitNewMessage(messageData, cb){
     socket.emit('newMessage', messageData)
 
-    socket.on('newMessage', messages => cb(null, messages))
-    socket.emit('disconnect')
+    socket.on('newEmitMessage', messages => {
+        cb(null, messages); socket.removeListener('newEmitMessage')
+    })
 }
 
 export {subscribeToTimer, roomMessages, submitNewMessage}
