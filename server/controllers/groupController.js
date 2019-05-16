@@ -55,8 +55,8 @@ async function getMessages( req, res) {
     const {id} = req.params
     const db = req.app.get('db')
 
-    const messages = await db.messages.where("room_id = $1", [id])
-    res.status(200).send(messages)
+    const messages = await db.messages.find({room_id: id}, {limit:20, order: [{field:"message_id", direction:"desc"}]})
+    res.status(200).send(messages.reverse())
     // console.log('all messages', messages)
 }
 

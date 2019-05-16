@@ -30,6 +30,7 @@ function submitNewMessage(messageData, cb){
     socket.emit('newMessage', messageData)
 
     socket.on('newMessage', messages => cb(null, messages))
+    socket.emit('disconnect')
 }
 
 export {subscribeToTimer, roomMessages, submitNewMessage}

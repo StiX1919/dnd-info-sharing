@@ -74,26 +74,22 @@ const io = socket(app.listen(PORT_NUM, () => {
 }))
 
 
-let interval;
 io.on('connection', (client) => {
     console.log('new guy on')
-    if(interval){
-        clearInterval(interval)
-    }
-    interval = setInterval(() => console.log('in interval'), 2000)
 
     client.on('updateRoom', async (id) => {
 
         let db = app.get('db')
-        messages = await db.messages.where("room_id = $1", [id])
-        client.emit('newMessages', {messages})            
+        messages = await db.messages.find({room_id: id}, {limit:20, order: [{field:"message_id", direction:"desc"}]})
+        // console.log(messages, messages.reverse())
+        client.emit('newMessages', {messages: messages.reverse()})            
     })
 
     client.on('newMessage', async(messageData) => {
         const {room, message, time_stamp, userID} = messageData
         const db = app.get('db')
         let newMessage = await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
-
+        console.log('newMessage')
         io.sockets.emit('newMessage', {newMessage, room})
     })
         
