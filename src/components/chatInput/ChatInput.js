@@ -10,6 +10,7 @@ import {postMessage, newMessages, newMessage} from '../../ducks/reducers/groupRe
 import {submitNewMessage} from '../../api'
 
 
+
 class ChatInput extends Component {
     constructor(){
         super()

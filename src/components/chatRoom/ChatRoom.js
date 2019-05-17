@@ -2,7 +2,8 @@ import React, {useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux';
 import { getMessages } from '../../ducks/reducers/groupReducer'
 import MessagesHolder from './crComponents/MessagesHolder/MessagesHolder'
-import moment from 'moment'
+
+
 
 
 import './chatRoom.css'

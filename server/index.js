@@ -90,7 +90,7 @@ io.on('connection', (client) => {
         const db = app.get('db')
         let updatedMessage = await db.messages.insert({created_by: userID, message: message, room_id: room, time_stamp: time_stamp})
         console.log(client.id);
-        io.emit('newEmitMessage', {updatedMessage, room})
+        io.sockets.emit('newEmitMessage', {updatedMessage, room})
     })
         
     client.on('disconnect', () => {
