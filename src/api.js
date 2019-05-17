@@ -3,7 +3,7 @@ import {newMessages} from './ducks/reducers/groupReducer'
 import { animateScroll } from "react-scroll";
 const socket = openSocket('http://localhost:3001')
 
-socket.on('newEmitMessage')
+// socket.on('newEmitMessage')
 
 console.log('in api')
 
@@ -27,7 +27,7 @@ function roomMessages(roomID, cb) {
 
 
 function submitNewMessage(messageData, cb){
-    // socket.removeListener('newEmitMessage');
+    socket.removeListener('newEmitMessage');
     
     socket.emit('newMessage', messageData)
     socket.on('newEmitMessage', messages => {
