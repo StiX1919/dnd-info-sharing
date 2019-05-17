@@ -150,7 +150,7 @@ export default function groupReducer(state=initialState, action) {
             }
             else return state
         case NEW_MESSAGE:
-            if(state.currentRoom === action.payload.room){
+            if(state.currentRoom === action.payload.room && action.payload.newMessage.message_id !== state.messages[state.messages.length - 1].message_id){
                 return {...state, messages: [...state.messages, action.payload.newMessage]}
             }
             else return state

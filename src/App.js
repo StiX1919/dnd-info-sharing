@@ -11,9 +11,13 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 
 import {setUser} from './ducks/reducers/userReducer'
+import {newMessage} from './ducks/reducers/groupReducer'
+
+import openSocket from 'socket.io-client'
 
 import './App.css';
 
+const socket = openSocket('http://localhost:3001')
 class App extends Component {
   constructor() {
     super()
@@ -32,6 +36,12 @@ class App extends Component {
         this.props.setUser(res.data)
       })
     }
+    socket.on('newEmitMessage', messages => {
+      (() => {
+        console.log('MESSAGES: ', messages)
+        this.props.newMessage(messages)
+    })()
+  })
   }
   handleShowing = () => {
     this.setState((prevState) => {
@@ -74,4 +84,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({...state.userReducer, groupModel: state.groupReducer.groupModel})
 
-export default connect(mapStateToProps, {setUser})(App);
+export default connect(mapStateToProps, {setUser, newMessage})(App);
