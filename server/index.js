@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
-const axios = require('axios')
 const massive = require('massive')
 const socket = require('socket.io')
 

@@ -42,8 +42,8 @@ class App extends Component {
       (() => {
         console.log('MESSAGES: ', messages)
         this.props.newMessage(messages)
-    })()
-  })
+      })()
+    })
   }
   handleShowing = () => {
     this.setState((prevState) => {
@@ -70,9 +70,6 @@ class App extends Component {
             <Profile />
           }
         </div>
-
-
-
 
 
         {/* model for adding new group*/}

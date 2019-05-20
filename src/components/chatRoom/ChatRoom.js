@@ -12,13 +12,10 @@ function ChatRoom (props) {
     let [state, setState] = useState({timestamp: 'none yet'})
 
     useEffect( () => {
-        console.log('effect hit')
-        
         if(props.groupReducer.currentRoom !== 0) {
             props.getMessages(props.groupReducer.currentRoom)
         }
     }, [props.groupReducer.currentRoom]);
-    
     
     // console.log(state)
     return (

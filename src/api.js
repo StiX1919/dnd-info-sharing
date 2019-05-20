@@ -1,6 +1,4 @@
 import openSocket from 'socket.io-client'
-import {newMessages} from './ducks/reducers/groupReducer'
-import { animateScroll } from "react-scroll";
 const socket = openSocket('http://localhost:3001')
 
 // socket.on('newEmitMessage')
@@ -35,7 +33,6 @@ function submitNewMessage(messageData, cb){
             cb(null, messages); 
         })
     }
-    count++
 }
 
-export {subscribeToTimer, roomMessages, submitNewMessage, count}
+export {subscribeToTimer, roomMessages, submitNewMessage}

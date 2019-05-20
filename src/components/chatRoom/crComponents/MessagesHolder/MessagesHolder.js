@@ -27,7 +27,6 @@ function MessagesHolder (props) {
     });
     
     function scrollToBottom(way) {
-        console.log('hit')
         messagesEnd.current.scrollIntoView({ behavior: way });
     }
 
@@ -40,7 +39,6 @@ function MessagesHolder (props) {
             </div>
         )
     })
-    console.log(count)
     return (
         <div ref={wrapper} id='messages' className={wrapper.current ?`messages ${props.groupReducer.messages.length * 154 < wrapper.current.parentElement.clientHeight && 'few-mess'}` : 'messages'}>
             {messages}
