@@ -13,6 +13,8 @@ import {connect} from 'react-redux'
 import {setUser} from './ducks/reducers/userReducer'
 import {newMessage} from './ducks/reducers/groupReducer'
 
+import {count} from './api'
+
 import openSocket from 'socket.io-client'
 
 import './App.css';

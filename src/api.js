@@ -4,7 +4,7 @@ import { animateScroll } from "react-scroll";
 const socket = openSocket('http://localhost:3001')
 
 // socket.on('newEmitMessage')
-
+let count = 0
 console.log('in api')
 
 // socket.on('newMessages', ({messages, room}) => {
@@ -30,9 +30,12 @@ function submitNewMessage(messageData, cb){
     socket.removeListener('newEmitMessage');
     
     socket.emit('newMessage', messageData)
-    socket.on('newEmitMessage', messages => {
-        cb(null, messages); 
-    })
+    if(count > 0) {
+        socket.on('newEmitMessage', messages => {
+            cb(null, messages); 
+        })
+    }
+    count++
 }
 
-export {subscribeToTimer, roomMessages, submitNewMessage}
+export {subscribeToTimer, roomMessages, submitNewMessage, count}
