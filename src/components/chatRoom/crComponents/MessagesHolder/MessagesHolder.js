@@ -46,6 +46,8 @@ function MessagesHolder (props) {
         </div>
     )
 }
+
+//at home start again soon
 const mapState = state => state
 
 export default connect(mapState, {getMessages})(MessagesHolder)
