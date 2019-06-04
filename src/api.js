@@ -25,14 +25,14 @@ function roomMessages(roomID, cb) {
 
 
 function submitNewMessage(messageData, cb){
-    socket.removeListener('newEmitMessage');
+    // socket.removeListener('newEmitMessage');
     
     socket.emit('newMessage', messageData)
-    if(count > 0) {
-        socket.on('newEmitMessage', messages => {
-            cb(null, messages); 
-        })
-    }
+    // if(count > 0) {
+    //     socket.on('newEmitMessage', messages => {
+    //         cb(null, messages); 
+    //     })
+    // }
 }
 
 export {subscribeToTimer, roomMessages, submitNewMessage}
